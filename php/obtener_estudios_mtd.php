@@ -1,0 +1,42 @@
+<?php 
+session_start();
+if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+	
+	
+	
+	require_once 'configMySQL.php';
+	
+	$returnJs = [];
+	$returnJs['show']= false;
+	
+	$conn = new mysqli($mysql_config['host'], $mysql_config['user'], $mysql_config['pass'], $mysql_config['db']);
+	
+	//check connection_aborted
+	if($conn -> connect_error) {
+		die("Connection failed: " . $conn -> connect_error);		
+	}
+	
+	$conn -> set_charset('utf8');
+		
+		$sql = "SELECT clave, nombre, precio_publico FROM estudioClinico WHERE activo=1"; 
+	
+	if(isset($_SESSION['usuario']) && $_SESSION['usuario'] == 1){
+		$sql = "SELECT clave as codigo, nombre as estudio, precio_publico as precio,IFNULL(precio_proveedor,'No registrado') as costo, pk_estudioClinico as id FROM estudioClinico WHERE activo=1 "; 
+		$returnJs['show']= true;
+	}
+	$result = $conn->query($sql);
+
+	if($result->num_rows > 0){
+	
+	while($row = $result->fetch_assoc()){
+		$row['id']= base64_encode($row['id']);
+		$returnJs['estudio'][] = $row;
+		
+	}
+	 $result->free();
+	echo json_encode($returnJs);
+	$conn->close();
+}
+} 
+
+?>
