@@ -1,15 +1,5 @@
 $(function(){
-	
-	// var contenido = '<p>Lorem ipsum...</p>';
- 
-// var temporal = document.createElement("div");
-// temporal.innerHTML = contenido;
- 
-// var texto = temporal.textContent || temporal.innerText || "";
-// console.log(texto);
-// console.log(temporal.textContent );
-// console.log(temporal.innerText);
-// console.log($("#prueba").text());
+
 	$("#usuario").focus();
 	$("#formulario").submit(function(event){
 			
@@ -35,7 +25,7 @@ $(function(){
 				data : serializada
 				
 			}).done(function(respuesta){
-				console.log(respuesta);
+				
 				if(respuesta.registrado == true){
 					 
 					window.location.replace("visor_general_laboratorio.php");

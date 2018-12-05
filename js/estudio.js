@@ -1,6 +1,6 @@
 function crearCSV(tabla,nombreCSV){
 	var tablehtml = $("#"+tabla).html();
-	//console.log(tablehtml);
+	
 	var datos = tablehtml.replace(/\s\s+/g,'')
 						 .replace(/<tr>/g,'')
 						 .replace(/\r|\n/g,'')
@@ -28,14 +28,12 @@ function crearCSV(tabla,nombreCSV){
 	var csvFile = new Blob([datos], {type: "text/csv"});
 	var link = document.createElement("a");
 	link.download = nombreCSV+".csv";
-	//link.href = "data.application/csv,"+escape(datos);
 	link.href = window.URL.createObjectURL(csvFile);
 
 	link.click();
 	
 }
 function verDetalle(){
-	//alert("Hola "+$(this).attr("data-id"));
 	window.location.href= "detalle_estudio.php?estudio="+$(this).attr("data-id");
 }
 
@@ -48,7 +46,7 @@ $(function(){
 		
 	}).done(function(data){
 		var estudio = "";
-		console.log(data);
+		
 		data.estudio.forEach(function(entry){
 			estudio += '<tr><td>'+entry.codigo+'</td>'+
 							'<td>'+entry.estudio+'</td>'+
