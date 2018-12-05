@@ -24,6 +24,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sistema
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
+          <li><a href="sucursal.php">Sucursales</a></li>
           <li><a href="estudio.php">Estudios</a></li>
           <li><a href="perfil.php">Perfil</a></li>
 		  <li><a href="asignar_permiso.php">Permoso -> Perfil</a></li>
@@ -36,8 +37,8 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
 		
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;<?php echo $_SESSION['nombre']?></span></a></li>
+        <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
       </ul>
     </div>
   </div>

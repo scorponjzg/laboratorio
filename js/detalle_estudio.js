@@ -62,7 +62,7 @@ $(function(){
 		$('#clave').val(data.estudio.codigo);
 		$('#nombre').val(data.estudio.estudio);
 		$('#precio').val(data.estudio.precio);
-		if(data.estudio.consto != ''){
+		if(data.estudio.costo != ''){
 			$('#costo').val(data.estudio.costo);
 		}
 		$('#modificador').text(data.estudio.responsable);

@@ -13,7 +13,7 @@ function crearCSV(tabla,nombreCSV){
 						 .replace(/<\/tr>/g,'\r\n')
 						 .replace(/<th [a-z]*="[a-z|A-Z|0-9|%|:|;]*">/g,'')
 						 .replace(/<\/th>/g,',')
-						 .replace(/<a [a-z]*="#" [a-z]*="[a-z]* [a-z|-]* [a-z]*" [a-z]*="[a-z]*" [a-z|-]*="[0-9]*">/g,'')
+						 .replace(/<a [^>]*>/g,'')
 						 .replace(/<span [a-z]*="[a-z]* [a-z|-]*">/g,'')
 						 .replace(/<b>/g,'')
 						 .replace(/<\/a>/g,'')
@@ -36,14 +36,15 @@ function crearCSV(tabla,nombreCSV){
 function verDetalle(){
 	window.location.href= "detalle_estudio.php?estudio="+$(this).attr("data-id");
 }
+function encotrarEstudio(){
 
-$(function(){
+	var buscar = $("#buscar").val();
 	
 	$.ajax({
 		method: "POST",
 		url: "php/obtener_estudios_mtd.php",
-		dataType:"json"
-		
+		dataType:"json",
+		data:{"buscar":buscar}
 	}).done(function(data){
 		var estudio = "";
 		
@@ -58,6 +59,7 @@ $(function(){
 			}
 			estudio +='</tr>';
 		});
+		$('#estudios').empty();
 		$('#estudios').append(estudio);
 
 		$(".ver").on("click",verDetalle);
@@ -66,5 +68,8 @@ $(function(){
 		alert("Por el momento no est\u00E1 disponible el servicio, intente m\u00E1s tarde");
 		
 	});
+}
+$(function(){
+	encotrarEstudio();
 	
 });

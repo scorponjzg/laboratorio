@@ -9,7 +9,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Estudios</title>
+  <title>Sucursales</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="img/favicon.png">
@@ -19,7 +19,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
   <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/bootstrap-select.js" type="text/javascript"></script>
-  <script src="js/estudio.js"></script>
+  <script src="js/sucursal.js"></script>
 </head>
 <body>
 
@@ -46,11 +46,11 @@ th {
 						
 							<div style="text-align: center; margin-top: 12px" id="boton_nuevo">
 								<?php if($_SESSION['tipo'] == 1){ ?>
-									<button id="nuevo" type="button" class="btn btn-success" style="width:40%;text-align:center; color: white; background:rgb(32,190,198);" onclick="window.location.replace('nuevo_estudio.php')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo estudio</button>
+									<button id="nuevo" type="button" class="btn btn-success" style="width:40%;text-align:center; color: white; background:rgb(32,190,198);" onclick="window.location.replace('nuevo_estudio.php')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva sucursal</button>
 									<br>
 									<br>
 								<?php }?>
-								<button onclick="crearCSV('estudios','estudios')">Exportar a CSV</button>
+								
 								<br>
 								<input type="text" placeholder="Ingrese el nombre o una parte para buscar" style="width:60%;margin: 18px auto ;text-align: center" id="buscar">
 								<button onclick="encotrarEstudio()">Buscar</button>
@@ -62,23 +62,19 @@ th {
 				<div class="tab-content">
 					
 						<div class="table-responsive">
-							<table class="table table-bordered"style="margin-top: 20px;" id="reclutados" name="estudios">
+							<table class="table table-bordered"style="margin-top: 20px;" id="reclutados" name="sucursales">
 								<thead >
 								  <tr class="info">
-									<th style="width:10%;">Clave</th>
-									<th style="width:40%;">Nombre</th>
-									<th style="width:10%;">Precio</th>
-									<?php if($_SESSION['tipo'] == 1){ ?>	
-									<th style="width:10%;">Costo</th>
-									<?php }?>
-									<?php if($_SESSION['tipo'] == 1){ ?>	
-									<th style="width:10%;">Detalle</th>
-									<?php }?>
-									
-									
+									<th style="width:10%;">Nombre</th>
+									<th style="width:40%;">Dirección</th>
+									<th style="width:10%;">Teléfono</th>
+									<th style="width:10%;">Web</th>
+									<th style="width:10%;">Correo</th>
+									<th style="width:10%;">Editar</th>
+									<th style="width:10%;">Eliminar</th>
 								  </tr>
 								</thead>
-								<tbody id="estudios">
+								<tbody id="sucursal">
 								  
 								</tbody>
 							</table>

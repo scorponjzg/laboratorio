@@ -33,6 +33,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
 		$result->free();
 		$_SESSION['usuario'] = $row['pk_usuario'];
 		$_SESSION['tipo'] = $row['fk_perfil'] ;
+		$_SESSION['nombre'] = $row['nombre'] ;
 		//error_log(print_r($row, true));
 	}
 					

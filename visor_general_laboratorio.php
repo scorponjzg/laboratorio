@@ -19,7 +19,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
   <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/bootstrap-select.js" type="text/javascript"></script>
-  <script src="js/visor_general.js"></script>
+  <!--script src="js/visor_general_laboratorio.js"></script-->
 </head>
 <body>
 

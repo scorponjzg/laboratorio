@@ -15,10 +15,10 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 	
 	$conn -> set_charset('utf8');
 
-	$id_estudio = isset($_POST['estudio']) ? $conn->real_escape_string($_POST['estudio']) : '';
+	$id = isset($_POST['estudio']) ? $conn->real_escape_string($_POST['estudio']) : '';
 		
 	if(isset($_SESSION['usuario']) && $_SESSION['usuario'] == 1){
-		$sql = "SELECT clave as codigo, nombre as estudio, precio_publico as precio,IFNULL(precio_proveedor,'') as costo, pk_estudioClinico as id, create_time as fecha_registro, IFNULL(update_time,'No editado') as fecha_editado, quien_modifico as responsable FROM estudioClinico WHERE activo=1 && pk_estudioClinico=".base64_decode($id_estudio); 
+		$sql = "SELECT clave as codigo, nombre as estudio, precio_publico as precio,IFNULL(precio_proveedor,'') as costo, pk_estudioClinico as id, create_time as fecha_registro, IFNULL(update_time,'No editado') as fecha_editado, quien_modifico as responsable FROM estudioClinico WHERE activo=1 && pk_estudioClinico=".base64_decode($id); 
 		$result = $conn->query($sql);
 		if($result->num_rows == 1){
 		

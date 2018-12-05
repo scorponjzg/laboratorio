@@ -7,7 +7,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		require_once 'configMySQL.php';
 		
 		$returnJs = [];
-		$returnJs['editado'] = 'false';
+		$returnJs['eliminado'] = 'false';
 		$conn = new mysqli($mysql_config['host'], $mysql_config['user'], $mysql_config['pass'], $mysql_config['db']);
 		
 		//check connection_aborted
@@ -17,14 +17,14 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		
 		$conn -> set_charset('utf8');
 
-		$id_estudio = isset($_POST['estudio']) ? $conn->real_escape_string($_POST['estudio']) : '';
+		$id = isset($_POST['sucursal']) ? $conn->real_escape_string($_POST['sucursal']) : '';
 			
-			$sql = "UPDATE estudioClinico SET activo=0,quien_modifico=(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}) WHERE pk_estudioClinico=".base64_decode($id_estudio)."; ";
-				
+			$sql = "UPDATE unidad SET activo=0 WHERE pk_unidad=".base64_decode($id)."; ";
+			
 			$conn->query($sql);
 			if($conn->affected_rows == 1){
 			
-				$returnJs['editado'] = 'true';
+				$returnJs['eliminado'] = 'true';
 			
 			}
 		

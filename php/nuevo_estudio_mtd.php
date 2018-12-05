@@ -7,7 +7,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		require_once 'configMySQL.php';
 		
 		$returnJs = [];
-		$returnJs['ingresado'] = 'Por el momento no se encuentra en la funcionalidad activa, intente en otro momento.';
+		$returnJs['ingresado'] = 'Por el momento no se encuentra en la funcionalidad activa, intente más tarde.';
 		$noCambios = 0;
 		$conn = new mysqli($mysql_config['host'], $mysql_config['user'], $mysql_config['pass'], $mysql_config['db']);
 		
@@ -23,10 +23,14 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		$nombre = isset($_POST['nombre']) ? $conn->real_escape_string($_POST['nombre']) : '';
 		$precio = isset($_POST['precio']) ? $conn->real_escape_string($_POST['precio']) : '';
 		$costo = isset($_POST['costo']) ? $conn->real_escape_string($_POST['costo']) : '';
-			$sql = "INSERT INTO estudioClinico(clave,nombre,precio_publico,precio_proovedor,tipo_ingreso,quien_modifico) VALUES('{$clave}','{$nombre}',{$precio},{$costo},'Ingreso por sistema','(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']})');";
-			$sql = "UPDATE estudioClinico SET clave='{$clave}', nombre='{$nombre}', precio_publico={$precio}, precio_proveedor={$costo}, quien_modifico=(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}) WHERE pk_estudioClinico=".base64_decode($id_estudio)."; ";
-				
-			$noCambios = $conn->query($sql);
+
+		if($costo != ''){
+			$sql = "INSERT INTO estudioClinico(clave,nombre,precio_publico,precio_provedor,tipo_ingreso,quien_modifico) VALUES('{$clave}','{$nombre}',{$precio},{$costo},'Ingreso por sistema',(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}));";
+		} else {
+			$sql = "INSERT INTO estudioClinico(clave,nombre,precio_publico,tipo_ingreso,quien_modifico) VALUES('{$clave}','{$nombre}',{$precio},'Ingreso por sistema',(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}));";
+		}
+			
+			$conn->query($sql);
 			
 			if($conn->affected_rows == 1){
 			

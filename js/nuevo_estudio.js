@@ -37,11 +37,11 @@ $(function(){
 				data: estudio 
 				}).done(function(entry){
 					console.log(entry);
-					if(entry.editado == 'true'){
+					if(entry.ingresado == 'true'){
 						alert("Estudio creado correctamente.");
 						window.location.replace("estudio.php");
 					} else {
-						alert(entry.editado);
+						alert(entry.ingresado);
 					}
 				}).fail(function(error){
 					console.log(error);
