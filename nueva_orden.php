@@ -35,36 +35,67 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
   <?php include 'navMenu.php'?>
   <div class="panel panel-default" style="width:60%; margin: 80px auto; text-align:center">
     <form action="#" style="margin: 0px;" id='formulario' autocomplete="off">
-		<div class="well" style="margin: 0px">		
-			<div class="form-group">		 
-				<label for="ap">*Apellido paterno:</label>
-				<input type="text" class="form-control" id="ap" name="ap" placeholder="Ingrese el apellido paterno">
+		<div class="well" style="margin: 0px">
+			 <div class="form-group" style="width:100%">
+			 	<label for="estudios">Seleccione los estudios:</label>
+			 	<select class="selectpicker" data-live-search="true" data-width="100%" id="select">
+				</select>
+
+			 </div>
+		<div class="row">
+  			<div class="col-sm-4">		
+				<div class="form-group">		 
+					<label for="ap"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>Apellido paterno:</label>
+					<input type="text" class="form-control" id="ap" name="ap" placeholder="Ingrese el apellido paterno">
+				</div>
 			</div>
+			<div class="col-sm-4">		
 			 <div class="form-group">		
 				<label for="am">Apellido materno:</label>
 				<input type="text" class="form-control" id="am" name="am" placeholder="Ingrese el apellido materno">
 			 </div>	
+			</div>	
+			 <div class="col-sm-4">		
 			 <div class="form-group">	
-				<label for="nombre">*Nombres:</label>
+				<label for="nombre"><span class="glyphicon glyphicon-asterisk" aria-hidden="true">Nombres:</label>
 				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese un nombre">
 			 </div>
-			 <div class="form-group">	
-				<label for="edad">*Edad:</label>
-				<input type="text" class="form-control" id="edad" name="edad" placeholder="Ingrese la edad del paciente">
+			</div>
+		</div>
+		<div class="row">
+  			<div class="col-sm-4">
+				 <div class="form-group">	
+					<label for="edad"><span class="glyphicon glyphicon-asterisk" aria-hidden="true">Edad:</label>
+					<input type="text" class="form-control" id="edad" name="edad" placeholder="Ingrese edad del paciente">
+				 </div>
 			 </div>
-			  <div class="form-group">	
-				<label for="sexo">*Sexo:</label>
-				<input type="text" class="form-control" id="sexo" name="sexo" placeholder="Ingrese el sexo del paciente">
+			 <div class="col-sm-4">
+				  <div class="form-group">	
+					<label for="sexo"><span class="glyphicon glyphicon-asterisk" aria-hidden="true">Sexo:</label>
+						<select class="form-control"  id="sexo" name="sexo">
+							<option value="0">Escoja una opción</option>
+							<option value="Masculino" style="background-color: rgb(82,188,220),">Masculino</option>
+							<option value="Femenino" style="background-color: pink,">Femenino</option>
+						</select>
+					
+				 </div>
 			 </div>
-			 <div class="form-group">	
-				<label for="tel">Tel&eacute;fono:</label>
-				<input type="text" class="form-control" id="tel" name="tel" placeholder="Ingrese un n&uacute;mero tel&eacute;fonico">
+			 <div class="col-sm-4">
+				 <div class="form-group">	
+					<label for="tel">Tel&eacute;fono:</label>
+					<input type="text" class="form-control" id="tel" name="tel" placeholder="Ingrese n&uacute;mero tel&eacute;fonico">
+				 </div>
 			 </div>
-			 <div class="form-group" style="width:100%">
-			 	<label for="estudios">Seleccione los estudios:</label>
-			 	<select class="selectpicker dropdown" data-live-search="true" data-width="100%" id="select">
-				</select>
-
+			 <div class="form-group">
+			 	<table class="table table-bordered">
+			 		<thead>
+			 			<tr>
+			 				<th class="info" style="width:15%"></th>
+			 				<th class="info" style="width:60%; text-align: center">Estudios</th>
+			 				<th class="info" style="width:15%"></th>
+			 			</tr>
+			 		</thead>
+			 	</table>
 			 </div>
 					  
 			  <button type="commit" class="btn btn-info " style="margin-right:25px;" >Guardar</button>

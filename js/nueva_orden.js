@@ -1,3 +1,4 @@
+var estudios= new Array();
 function validaForm(){
 	var correcto = false;
 	if($("#clave").val() == ''){
@@ -32,8 +33,8 @@ function obtenerEstudios(){
 		console.log(data);
 		var estudio = '';
 		data.estudio.forEach(function(entry){
-			estudio += '<option value="'+entry.id+'">'+entry.codigo+' --- '+entry.estudio+'</option>';
-			
+			estudio += '<option  value="'+entry.id+'" >'+entry.codigo+' --- '+entry.estudio+' --- $'+entry.precio+'</option>';
+			estudios['id'+entry.id] = {codigo: entry.codigo, estudio: entry.estudio, precio: entry.precio}
 		});
 		$("#select").append(estudio);
 		$('.selectpicker').selectpicker('refresh');
@@ -42,13 +43,16 @@ function obtenerEstudios(){
 	});
 }
 $(function(){
+	
 	obtenerEstudios();
+		//console.log(estudios);
 
 	$("#formulario").submit(function(event){
 		event.preventDefault();
+		console.log(estudios);
 		var estudio = $(this).serialize();
 		console.log(estudio);
-		if(validaForm()){	
+		/*if(validaForm()){	
 				
 				$.ajax({
 				method: "POST",
@@ -67,7 +71,7 @@ $(function(){
 					console.log(error);
 				});
 			
-		} 
+		} */
 	})
 	
 });
