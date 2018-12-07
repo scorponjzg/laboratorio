@@ -29,61 +29,61 @@ th {
 	text-align:center;
 }
 </style>
-	<div class="container centrado" style="padding-left: 0px;">
+<div class="container centrado" style="padding-left: 0px;">
 	<?php include 'navMenu.php'?>
 	
-<div class="starter-template" style="text-align:center">
-	<br>
-	
+	<div class="starter-template" style="text-align:center">
+		<br>
+		
 
-	<div class="tab-content">
-		<div id="resultados" class="tab-pane fade in active">
-			<div class="centrado">
-				
-				<div class="panel panel-default" style="width: 60%; margin:6% auto 0 auto; ">
+		<div class="tab-content">
+			<div id="resultados" class="tab-pane fade in active">
+				<div class="centrado">
 					
+					<div class="panel panel-default" style="width: 60%; margin:6% auto 0 auto; ">
+						
 						<div class="panel panel-body" style="margin-bottom: 0px;">
 						
 							<div style="text-align: center; margin-top: 12px" id="boton_nuevo">
 								
-								<button id="nuevo" type="button" class="btn btn-success" data-accion="1" style="width:45%;text-align:center; color: white; background:rgb(32,190,198);"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva orden</button>
+								<button id="nuevo" type="button" class="btn btn-success" data-accion="1" style="width:45%;text-align:center; color: white; background:rgb(32,190,198);" onclick="window.location.href='nueva_orden.php'"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva orden</button>
 								<br>
 								<br>
-								<button onclick="crearCSV('reclutados','reclutados')">Exportar a CSV</button>
+								<!--button onclick="crearCSV('reclutados','reclutados')">Exportar a CSV</button-->
 							</div>
 						</div>
-					
-				</div>
-				
-				<div class="tab-content">
-					
-						<!--div class="table-responsive">
-							<table class="table table-bordered"style="margin-top: 20px;" id="reclutados" name="reclutados">
-								<thead >
-								  <tr class="info">
-									<th style="width:12%;">Foto</th>
-									<th style="width:13%;">Nombre</th>
-									<th style="width:12%;">Tel&eacute;fono / Celular</th>
-									<th style="width:10%;">Medio de contacto</th>
-									<th style="width:4%;">Edad</th>
-									<th style="width:10%;">Servicio de interes</th>
-									<th style="width:10%;">Estatus</th>
-									<th style="width:13%;">Reclutador</th>
-									<th style="width:10%;">Fecha</th>
-									<th style="width:6%;">Editar</th>
-								  </tr>
-								</thead>
-								<tbody id="reporte">
-								  
-								</tbody>
-							</table-->
 						
-							<br>
+					</div>
+					
+					<div class="tab-content">
+						
+							<!--div class="table-responsive">
+								<table class="table table-bordered"style="margin-top: 20px;" id="reclutados" name="reclutados">
+									<thead >
+									  <tr class="info">
+										<th style="width:12%;">Foto</th>
+										<th style="width:13%;">Nombre</th>
+										<th style="width:12%;">Tel&eacute;fono / Celular</th>
+										<th style="width:10%;">Medio de contacto</th>
+										<th style="width:4%;">Edad</th>
+										<th style="width:10%;">Servicio de interes</th>
+										<th style="width:10%;">Estatus</th>
+										<th style="width:13%;">Reclutador</th>
+										<th style="width:10%;">Fecha</th>
+										<th style="width:6%;">Editar</th>
+									  </tr>
+									</thead>
+									<tbody id="reporte">
+									  
+									</tbody>
+								</table-->
+							
+								<br>
 					</div>
 				</div>
 			</div>
 		</div>
-			 
+				 
 	</div>
 </div>
 

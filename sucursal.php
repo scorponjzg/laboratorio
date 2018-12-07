@@ -9,7 +9,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Sucursales</title>
+  <title>Sucursal</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="img/favicon.png">
@@ -46,7 +46,7 @@ th {
 						
 							<div style="text-align: center; margin-top: 12px" id="boton_nuevo">
 								<?php if($_SESSION['tipo'] == 1){ ?>
-									<button id="nuevo" type="button" class="btn btn-success" style="width:40%;text-align:center; color: white; background:rgb(32,190,198);" onclick="window.location.replace('nuevo_estudio.php')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva sucursal</button>
+									<button id="nuevo" type="button" class="btn btn-success" style="width:40%;text-align:center; color: white; background:rgb(32,190,198);" onclick="window.location.replace('nueva_sucursal.php')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva sucursal</button>
 									<br>
 									<br>
 								<?php }?>
@@ -70,8 +70,10 @@ th {
 									<th style="width:10%;">Teléfono</th>
 									<th style="width:10%;">Web</th>
 									<th style="width:10%;">Correo</th>
-									<th style="width:10%;">Editar</th>
-									<th style="width:10%;">Eliminar</th>
+									<?php if($_SESSION['tipo'] == 1){ ?>
+										<th style="width:10%;">Editar</th>
+										<th style="width:10%;">Eliminar</th>
+									<?php } ?>
 								  </tr>
 								</thead>
 								<tbody id="sucursal">

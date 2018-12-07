@@ -42,19 +42,19 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
 		<div class="well">		
 			<div class="form-group">		 
 				<label for="clave">*Clave:</label>
-				<input type="text" class="form-control editar" id="clave" name="clave">
+				<input type="text" class="form-control editar" id="clave" name="clave" placeholder="Ingrese una clave">
 			</div>
 			 <div class="form-group">		
 				<label for="nombre">*Nombre de estudio:</label>
-				<input type="text" class="form-control editar" id="nombre" name="nombre">
+				<input type="text" class="form-control editar" id="nombre" name="nombre" placeholder="Ingrese el nombre del estudio">
 			 </div>	
 			 <div class="form-group">	
-				<label for="precio">Precio p&uacute;blico:</label>
-				<input type="number" class="form-control editar" id="precio" name="precio">
+				<label for="precio">*Precio p&uacute;blico:</label>
+				<input type="number" class="form-control editar" id="precio" name="precio" placeholder="Ingrese el precio al p&uacute;blico">
 			 </div>
 			 <div class="form-group">	
 				<label for="costo">Costo:</label>
-				<input type="number" class="form-control editar" id="costo" name="costo">
+				<input type="number" class="form-control editar" id="costo" name="costo" placeholder="Ingrese el costo del estudio">
 			 </div>
 					  
 			  <button type="commit" class="btn btn-info btnEditar" style="margin-right:25px;" >Guardar</button>

@@ -47,18 +47,19 @@ function encotrarEstudio(){
 		data:{"buscar":buscar}
 	}).done(function(data){
 		var estudio = "";
-		
-		data.estudio.forEach(function(entry){
-			estudio += '<tr><td>'+entry.codigo+'</td>'+
-							'<td>'+entry.estudio+'</td>'+
-							'<td>'+entry.precio+'</td>';
-			if(data.show == true){
-				estudio +='<td>'+entry.costo+'</td>'+
-						  '<td><a href="#" class="btn btn-default ver" role="button" data-id="'+entry.id+'">'+
-						  '<span class="glyphicon glyphicon-eye-open"></span></a></td>';
-			}
-			estudio +='</tr>';
-		});
+		if(typeof(data.estudio) != 'undefined'){
+			data.estudio.forEach(function(entry){
+				estudio += '<tr><td>'+entry.codigo+'</td>'+
+								'<td>'+entry.estudio+'</td>'+
+								'<td>'+entry.precio+'</td>';
+				if(data.show == true){
+					estudio +='<td>'+entry.costo+'</td>'+
+							  '<td><a href="#" class="btn btn-default ver" role="button" data-id="'+entry.id+'">'+
+							  '<span class="glyphicon glyphicon-eye-open"></span></a></td>';
+				}
+				estudio +='</tr>';
+			});
+		}
 		$('#estudios').empty();
 		$('#estudios').append(estudio);
 

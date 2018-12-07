@@ -33,20 +33,26 @@ function encotrarEstudio(){
 		data:{"buscar":buscar}
 	}).done(function(data){
 		var unidad = "";
-		console.log(data);
-		data.unidad.forEach(function(entry){
-			unidad += '<tr><td>'+entry.sucursal+'</td>'+
-							'<td>'+entry.lugar+'</td>'+
-							'<td>'+entry.tel+'</td>'+
-							'<td>'+entry.pagina+'</td>'+
-							'<td>'+entry.email+'</td>'+
-						  '<td><a href="#" class="btn btn-default edita" role="button" data-id="'+entry.id+'">'+
-						  '<span class="glyphicon glyphicon-pencil"></span></a></td>'+
-						  '<td><a href="#" class="btn btn-default elimina" role="button" data-id="'+entry.id+'">'+
-						  '<span class="glyphicon glyphicon-remove"></span></a></td>';
-			
-			unidad +='</tr>';
-		});
+		
+		if(typeof(data.unidad) != 'undefined'){
+			data.unidad.forEach(function(entry){
+				unidad += 
+					'<tr><td>'+entry.sucursal+'</td>'+
+					'<td>'+entry.lugar+'</td>'+
+					'<td>'+entry.tel+'</td>'+
+					'<td>'+entry.pagina+'</td>'+
+					'<td>'+entry.email+'</td>';
+				if(data.show == true){
+		
+					  unidad += '<td><a href="#" class="btn btn-default edita" role="button" data-id="'+entry.id+'">'+
+					  '<span class="glyphicon glyphicon-pencil"></span></a></td>'+
+					  '<td><a href="#" class="btn btn-default elimina" role="button" data-id="'+entry.id+'">'+
+					  '<span class="glyphicon glyphicon-remove"></span></a></td>';
+				}
+							
+				unidad +='</tr>';
+			});
+		}
 		$('#sucursal').empty();
 		$('#sucursal').append(unidad);
 

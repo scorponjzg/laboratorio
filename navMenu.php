@@ -21,20 +21,19 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
       <ul class="nav navbar-nav">
         <li class="active"><a href="visor_general_laboratorio.php">Home</a></li>
         <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sistema
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="sucursal.php">Sucursales</a></li>
-          <li><a href="estudio.php">Estudios</a></li>
-          <li><a href="perfil.php">Perfil</a></li>
-		  <li><a href="asignar_permiso.php">Permoso -> Perfil</a></li>
-		  <li><a href="asignar_perfil.php">Perfil -> Usuario</a></li>
-        </ul>
-      </li>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sistema
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="sucursal.php">Sucursales</a></li>
+            <li><a href="estudio.php">Estudios</a></li>
+            <!--li><a href="perfil.php">Perfil</a></li>
+      		  <li><a href="asignar_permiso.php">Permoso -> Perfil</a></li>
+      		  <li><a href="asignar_perfil.php">Perfil -> Usuario</a></li-->
+          </ul>
+        </li>
 	  
         <li ><a href="#">Usuario</a></li> 
-        <li><a href="#">Page 3</a></li> 
-		
+       
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;<?php echo $_SESSION['nombre']?></span></a></li>
