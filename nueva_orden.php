@@ -36,12 +36,24 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
   <div class="panel panel-default" style="width:60%; margin: 80px auto; text-align:center">
     <form action="#" style="margin: 0px;" id='formulario' autocomplete="off">
 		<div class="well" style="margin: 0px">
-			 <div class="form-group" style="width:100%">
-			 	<label for="estudios">Seleccione los estudios:</label>
-			 	<select class="selectpicker" data-live-search="true" data-width="100%" id="select">
-				</select>
+			<div class="row">
+				<div class="col-sm-9" style="padding-right:0px;">
+					
+					 <div class="form-group" style="width:100%">
+					 	<label for="estudios">Seleccione los estudios:</label>
+					 	<select class="selectpicker" data-live-search="true" data-width="100%" id="select">
+						</select>
 
-			 </div>
+					</div>
+				</div>
+				<div class="col-sm-3" style="padding-left:0px;">
+					<label for="botonAgregar">&nbsp;</label>
+				 	<div class="form-group" style="width:100%">
+						 <button type="button" class="btn btn-success" style="width:100%" onclick="agregarEstudio()">Agregar estudio</button>
+					</div>
+				</div>
+			
+			</div>
 		<div class="row">
   			<div class="col-sm-4">		
 				<div class="form-group">		 
@@ -92,14 +104,18 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
 			 			<tr>
 			 				<th class="info" style="width:15%"></th>
 			 				<th class="info" style="width:60%; text-align: center">Estudios</th>
-			 				<th class="info" style="width:15%"></th>
+			 				<th class="info" style="width:10%"></th>
+			 				<th class="info" style="width:10%"></th>
 			 			</tr>
 			 		</thead>
+			 		<tbody id="estudioSeleccionado">
+			 			
+			 		</tbody>
 			 	</table>
 			 </div>
 					  
 			  <button type="commit" class="btn btn-info " style="margin-right:25px;" >Guardar</button>
-			  <button type="button" class="btn btn-danger " style="margin: 0 auto;" onclick="window.location.replace('estudio.php');">Cancelar</button>
+			  <button type="button" class="btn btn-danger " style="margin: 0 auto;" onclick="window.location.replace('visor_general_laboratorio.php');">Cancelar</button>
 			  <br>
 			  <br>
 		</div>

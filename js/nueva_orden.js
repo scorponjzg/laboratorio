@@ -42,6 +42,19 @@ function obtenerEstudios(){
 		console.log(error.responseText);
 	});
 }
+function remover(){
+	
+	$( "#row"+atob($(this).attr("data-id"))).remove();
+	
+}
+function agregarEstudio(){
+	var id = $("#select").val();
+	var estudio = estudios['id'+id];
+	var listado = '<tr id="row'+atob($("#select").val())+'"><td>'+estudio.codigo+'</td><td>'+estudio.estudio+'</td><td>'+estudio.precio+'</td><td><a href="#" class="btn btn-danger btn-sm remover" role="button" data-id="'+id+'">'+
+							  '<span class="glyphicon glyphicon-remove"></span></a></td></tr>';
+	$("#estudioSeleccionado").append(listado);
+	$(".remover").on("click",remover);
+}
 $(function(){
 	
 	obtenerEstudios();
