@@ -21,15 +21,16 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
   <script src="js/bootstrap-select.js" type="text/javascript"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/nueva_orden.js"></script>
+  <script src="js/numerosALetras.js"></script>
 </head>
 <body> 
  <style>
  	
  	input {
  		text-align: center;
+
  	}
 
- 	
  </style>
 <div class="container">
   <?php include 'navMenu.php'?>
@@ -110,6 +111,22 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
 			 		</thead>
 			 		<tbody id="estudioSeleccionado">
 			 			
+			 		</tbody>
+			 	</table>
+			 	<table class="table table-bordered">
+			 		<thead>
+			 			<tr>
+			 				<th class="info" style="width: 80%;">Importe en letra</th>
+			 				<th class="info" style="width: 20%;text-align: center">total</th>
+			 				
+			 			</tr>
+			 		</thead>
+			 		<tbody>
+			 			<tr>
+			 				<td style="text-align: left;" id="totalEnLetra">CERO con 00/100</th>
+			 				<td id="total">0</th>
+			 				
+			 			</tr>
 			 		</tbody>
 			 	</table>
 			 </div>

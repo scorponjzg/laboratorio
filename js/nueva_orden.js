@@ -1,4 +1,5 @@
 var estudios= new Array();
+var total = 0.00;
 function validaForm(){
 	var correcto = false;
 	if($("#clave").val() == ''){
@@ -34,7 +35,7 @@ function obtenerEstudios(){
 		var estudio = '';
 		data.estudio.forEach(function(entry){
 			estudio += '<option  value="'+entry.id+'" >'+entry.codigo+' --- '+entry.estudio+' --- $'+entry.precio+'</option>';
-			estudios['id'+entry.id] = {codigo: entry.codigo, estudio: entry.estudio, precio: entry.precio}
+			estudios['id'+entry.id] = {codigo: entry.codigo, estudio: entry.estudio, precio: entry.precio, activo:true}
 		});
 		$("#select").append(estudio);
 		$('.selectpicker').selectpicker('refresh');
@@ -42,17 +43,37 @@ function obtenerEstudios(){
 		console.log(error.responseText);
 	});
 }
-function remover(){
-	
-	$( "#row"+atob($(this).attr("data-id"))).remove();
-	
+function cuatroDecimales(numero){
+	var temporal = parseFloat(parseInt(numero * 10000) / 10000);
+	return temporal;
 }
+function remover(){
+
+	var id = $(this).attr("data-id");
+	$( "#row"+atob(id)).remove();
+	
+	if(estudios['id'+id].activo == false){
+		
+		total -=parseFloat(estudios['id'+id].precio);
+		$("#total").html(cuatroDecimales(total));
+		$("#totalEnLetra").html("("+NumerosaLetras(cuatroDecimales(total))+")");
+	}
+	estudios['id'+id].activo = true;
+		
+}
+
 function agregarEstudio(){
 	var id = $("#select").val();
 	var estudio = estudios['id'+id];
-	var listado = '<tr id="row'+atob($("#select").val())+'"><td>'+estudio.codigo+'</td><td>'+estudio.estudio+'</td><td>'+estudio.precio+'</td><td><a href="#" class="btn btn-danger btn-sm remover" role="button" data-id="'+id+'">'+
-							  '<span class="glyphicon glyphicon-remove"></span></a></td></tr>';
-	$("#estudioSeleccionado").append(listado);
+	if(estudio.activo == true){
+		var listado = '<tr id="row'+atob(id)+'"><td>'+estudio.codigo+'</td><td>'+estudio.estudio+'</td><td>'+estudio.precio+'</td><td><a href="#" class="btn btn-danger btn-sm remover" role="button" data-id="'+id+'">'+'<input type="hidden" name="estudio'+id+'" value="'+atob(id)+'">'+
+								  '<span class="glyphicon glyphicon-remove"></span></a></td></tr>';
+		$("#estudioSeleccionado").append(listado);
+		estudios['id'+id].activo = false;
+		total+= parseFloat(estudios['id'+id].precio);
+		$("#total").html(total);
+		$("#totalEnLetra").html("("+NumerosaLetras(total)+")");
+	}
 	$(".remover").on("click",remover);
 }
 $(function(){
