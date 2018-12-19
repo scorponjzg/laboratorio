@@ -2,24 +2,23 @@ var estudios= new Array();
 var total = 0.00;
 function validaForm(){
 	var correcto = false;
-	if($("#clave").val() == ''){
-		alert("Debe de ingresar una clave");
-		$("#clave").focus();
+	if($("#ap").val() == ''){
+		alert("Debe ingresar el apellido paterno");
+		$("#ap").focus();
 	} else if($("#nombre").val() == ''){
 		alert("Debe de ingresar un nombre");
 		$("#nombre").focus();
-	} else if($("#precio").val() == ''){
-		alert("Debe de ingresar el precio al público");
-		$("#precio").focus();
-	} else if($("#costo").val() == ''){
-		if(confirm("¿Quiere registrar el estudio sin el precio de costo?")){
-			correcto = true;
-		} else {
-			
-			$("#precio").focus();	
-		}
-		
+	} else if($("#edad").val() == ''){
+		alert("Debe de ingresar la edad del paciente");
+		$("#edad").focus();
+	} else if($("#sexo").val() == 0){
+		alert("Debe de ingresar el sexo del paciente");
+		$("#sexo").focus();
+	} else if(total == 0){
+		alert("Debe de seleccionar por lo menos un estudio");
+		$('#select').data('selectpicker').$button.focus();
 	} else {
+		
 		correcto =  true;
 	}
 	return correcto;
@@ -86,11 +85,11 @@ $(function(){
 		console.log(estudios);
 		var estudio = $(this).serialize();
 		console.log(estudio);
-		/*if(validaForm()){	
+		if(validaForm()){	
 				
 				$.ajax({
 				method: "POST",
-				url: "php/nuevo_estudio_mtd.php",
+				url: "php/nueva_orden_mtd.php",
 				dataType: "json",
 				data: estudio 
 				}).done(function(entry){
@@ -102,10 +101,10 @@ $(function(){
 						alert(entry.ingresado);
 					}
 				}).fail(function(error){
-					console.log(error);
+					console.log(error.responseText);
 				});
 			
-		} */
+		} 
 	})
 	
 });

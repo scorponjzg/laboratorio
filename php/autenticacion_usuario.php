@@ -28,13 +28,13 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
 			//error_log($sql);						
 	$result = $conn->query($sql);
 	if ($result->num_rows == 1) {
-		$row = $result->fetch_assoc();
-		$returnJs['registrado'] = true ;
-		$result->free();
-		$_SESSION['usuario'] = $row['pk_usuario'];
-		$_SESSION['tipo'] = $row['fk_perfil'] ;
-		$_SESSION['nombre'] = $row['nombre'] ;
-		//error_log(print_r($row, true));
+			$row = $result->fetch_assoc();
+			$returnJs['registrado'] = true ;
+			$result->free();
+			$_SESSION['usuario'] = $row['pk_usuario'];
+			$_SESSION['tipo'] = $row['fk_perfil'] ;
+			$_SESSION['nombre'] = $row['nombre'] ;
+			//error_log(print_r($row, true));
 	}
 					
 	echo json_encode($returnJs);

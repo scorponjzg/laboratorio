@@ -37,19 +37,17 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
   <div class="panel panel-default" style="width:60%; margin: 80px auto; text-align:center">
     <form action="#" style="margin: 0px;" id='formulario' autocomplete="off">
 		<div class="well" style="margin: 0px">
+			<label >Seleccione los estudios:</label>
 			<div class="row">
 				<div class="col-sm-9" style="padding-right:0px;">
-					
-					 <div class="form-group" style="width:100%">
-					 	<label for="estudios">Seleccione los estudios:</label>
+					<div class="form-group" style="width:100%">
 					 	<select class="selectpicker" data-live-search="true" data-width="100%" id="select">
 						</select>
 
 					</div>
 				</div>
 				<div class="col-sm-3" style="padding-left:0px;">
-					<label for="botonAgregar">&nbsp;</label>
-				 	<div class="form-group" style="width:100%">
+					<div class="form-group" style="width:100%">
 						 <button type="button" class="btn btn-success" style="width:100%" onclick="agregarEstudio()">Agregar estudio</button>
 					</div>
 				</div>
@@ -79,7 +77,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
   			<div class="col-sm-4">
 				 <div class="form-group">	
 					<label for="edad"><span class="glyphicon glyphicon-asterisk" aria-hidden="true">Edad:</label>
-					<input type="text" class="form-control" id="edad" name="edad" placeholder="Ingrese edad del paciente">
+					<input type="number" class="form-control" min="0" id="edad" name="edad" placeholder="Ingrese edad del paciente">
 				 </div>
 			 </div>
 			 <div class="col-sm-4">
@@ -123,7 +121,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
 			 		</thead>
 			 		<tbody>
 			 			<tr>
-			 				<td style="text-align: left;" id="totalEnLetra">CERO con 00/100</th>
+			 				<td style="text-align: left;" id="totalEnLetra">CERO 00/100 M.N.</th>
 			 				<td id="total">0</th>
 			 				
 			 			</tr>

@@ -2,9 +2,9 @@ function NumerosaLetras(cantidad) {
 
     var numero = 0;
     cantidad = parseFloat(cantidad);
-    console.log(cantidad);
+    
     if (cantidad == "0.00" || cantidad == "0") {
-        return "CERO con 00/100 M.N.";
+        return "CERO 00/100 M.N.";
     } else {
         var ent = cantidad.toString().split(".");
         var arreglo = separar_split(ent[0]);
@@ -33,13 +33,13 @@ function NumerosaLetras(cantidad) {
 
         ent[1] = isNaN(ent[1]) ? '00' : ent[1];
 
-        return numero + " con " + ent[1] + "/100 M.N.";
+        return numero + " " + ent[1] + "/100 M.N.";
     }
 }
 
  function unidades(unidad) {
     var unidades = Array('UN ','DOS ','TRES ' ,'CUATRO ','CINCO ','SEIS ','SIETE ','OCHO ','NUEVE ');
-    console.log(unidad);
+    
     if(unidad == 0){
         return "CERO";
     } else{
