@@ -27,7 +27,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		
 			$sql = "INSERT INTO unidad(nombre,direccion, telefono, web, correo) VALUES('{$nombre}','{$dir}','{$tel}','{$web}','{$email}');";
 		
-			error_log($sql);
+			//error_log($sql);
 			$conn->query($sql);
 			
 			if($conn->affected_rows == 1){

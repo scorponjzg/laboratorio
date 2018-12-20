@@ -55,6 +55,7 @@ function remover(){
 		
 		total -=parseFloat(estudios['id'+id].precio);
 		$("#total").html(cuatroDecimales(total));
+		$("#total1").val(total);
 		$("#totalEnLetra").html("("+NumerosaLetras(cuatroDecimales(total))+")");
 	}
 	estudios['id'+id].activo = true;
@@ -71,6 +72,7 @@ function agregarEstudio(){
 		estudios['id'+id].activo = false;
 		total+= parseFloat(estudios['id'+id].precio);
 		$("#total").html(total);
+		$("#total1").val(total);
 		$("#totalEnLetra").html("("+NumerosaLetras(total)+")");
 	}
 	$(".remover").on("click",remover);
@@ -95,8 +97,9 @@ $(function(){
 				}).done(function(entry){
 					console.log(entry);
 					if(entry.ingresado == 'true'){
-						alert("Estudio creado correctamente.");
-						window.location.replace("estudio.php");
+						//alert("Orden creada correctamente.");
+						window.open('estudio.php?'+entry.nueva, '_blank');
+						window.location.replace("visor_general_laboratorio.php");
 					} else {
 						alert(entry.ingresado);
 					}

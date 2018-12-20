@@ -19,7 +19,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 	
 	$conn -> set_charset('utf8');
 		
-		$sql = "SELECT clave, nombre, precio_publico FROM estudioClinico WHERE activo=1 ".$buscar; 
+		$sql = "SELECT clave as codigo, nombre as estudio, precio_publico as precio,pk_estudioClinico as id FROM estudioClinico WHERE activo=1 ".$buscar; 
 	
 	if(isset($_SESSION['usuario']) && $_SESSION['usuario'] == 1){
 		$sql = "SELECT clave as codigo, nombre as estudio, precio_publico as precio,IFNULL(precio_proveedor,'No registrado') as costo, pk_estudioClinico as id FROM estudioClinico WHERE activo=1 ".$buscar; 

@@ -10,12 +10,15 @@ function RandomString(){
 session_start();
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
 	
-	if(isset($_SESSION['usuario']) && $_SESSION['usuario'] == 1){
+	
 
 		require_once 'configMySQL.php';
 		
 		$returnJs = [];
-		$returnJs['ingresado'] = 'Por el momento no se encuentra en la funcionalidad activa, intente más tarde.';
+		$estudio = [];
+		$total = 0;
+		$folio = "prueba78954";
+		$returnJs['ingresado'] = 'true';
 		$noCambios = 0;
 		$conn = new mysqli($mysql_config['host'], $mysql_config['user'], $mysql_config['pass'], $mysql_config['db']);
 		
@@ -33,33 +36,73 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		$edad = isset($_POST['edad']) ? $conn->real_escape_string($_POST['edad']) : '';
 		$sexo = isset($_POST['sexo']) ? $conn->real_escape_string($_POST['sexo']) : '';
 		$tel = isset($_POST['tel']) ? $conn->real_escape_string($_POST['tel']) : '';
+		//error_log(print_r($_POST,true));
+		//error_log(print_r($_SESSION,true));
 
-		if($costo != ''){
-			$sql = "INSERT INTO estudioClinico(clave,nombre,precio_publico,precio_provedor,tipo_ingreso,quien_modifico) VALUES('{$clave}','{$nombre}',{$precio},{$costo},'Ingreso por sistema',(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}));";
-		} else {
-			$sql = "INSERT INTO estudioClinico(clave,nombre,precio_publico,tipo_ingreso,quien_modifico) VALUES('{$clave}','{$nombre}',{$precio},'Ingreso por sistema',(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}));";
-		}
-			
-			$conn->query($sql);
-			
-			if($conn->affected_rows == 1){
-			
-				$returnJs['ingresado'] = 'true';
-			
-			} else {
-
-				if($noCambios == 1){
-					$returnJs['ingresado']="No realizó ningún cambio.";
-				}
+		foreach ($_POST as $key => $value) {
+			if(strpos($key,"estudio")!== false){
+				$estudio[]=$value;
 			}
+		}
+
+		 $pk = implode(",", $estudio);
+
+		 $sql = "SELECT SUM(precio_publico) as total FROM estudioClinico WHERE pk_estudioClinico IN ($pk)";
+		 error_log($sql);
+		 $result = $conn->query($sql);
+			
+		if($result->num_rows == 1){
+	
+			$total = $result->fetch_assoc();
+
+			if($total > 0){
+				$conn->query("START TRANSACTION;");
+				$sql = "INSERT INTO orden(folio, a_paterno_paciente, a_materno_paciente, nombre_paciente, edad, sexo, telefono, fk_usuario, fk_unidad,precio_total) VALUES('{$folio}','{$ap}','{$am}','{$nombre}',{$edad},'{$sexo}','{$tel}',{$_SESSION['usuario']},{$_SESSION['id_unidad']},{$total['total']});";
+				error_log($sql);
+				$conn->query($sql);
+
+				
+				if($conn->affected_rows == 1){
+					$last_id = $conn -> insert_id;
+					error_log(count($estudio));
+					for($i=0; $i < count($estudio); $i++){
+						$sql = "INSERT INTO estudio(fk_estudioClinico,fk_orden) VALUES($estudio[$i],$last_id);";
+							error_log($sql);
+							$conn->query($sql);
+							if($conn->affected_rows != 1){
+								$returnJs['ingresado']="5.Por el momento no se encuentra disponible el módulo de ordenes, por favor contacte al administrador del sistema.";
+							}
+					}
+
+					
+				
+				} else {
+					$returnJs['ingresado']="4.Por el momento no se encuentra disponible el módulo de ordenes, por favor contacte al administrador del sistema.";
+				}
+
+			}else{
+				$returnJs['ingresado']="3.Por el momento no se encuentra disponible el módulo de ordenes, por favor contacte al administrador del sistema.";
+			}
+		} else {
+				$returnJs['ingresado']="2.Por el momento no se encuentra disponible el módulo de ordenes, por favor contacte al administrador del sistema.";
+		}
 		
+		if($returnJs["ingresado"] == "true"){
+			$conn->query("COMMIT;");
+			error_log("COMMIT");
+			$returnJs['nueva']=base64_encode($last_id);
+		} else {
+			error_log("ROLLBACK");
+			$conn->query("ROLLBACK;");
+		}
 		echo json_encode($returnJs);
+		$result->free();
 		$conn->close();
 	} else {
 
-		header("HTTP/1.0 400 Bad Request");
+		$returnJs['ingresado']="1.Por el momento no se encuentra disponible el módulo de ordenes, por favor contacte al administrador del sistema.";
 
-		echo "No tiene los permisos requieridos";
 	}
+		
+	
 
-}

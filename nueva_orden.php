@@ -38,6 +38,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
     <form action="#" style="margin: 0px;" id='formulario' autocomplete="off">
 		<div class="well" style="margin: 0px">
 			<label >Seleccione los estudios:</label>
+			<input name="total" id="total1" type="hidden" value="0">
 			<div class="row">
 				<div class="col-sm-9" style="padding-right:0px;">
 					<div class="form-group" style="width:100%">
@@ -121,8 +122,8 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
 			 		</thead>
 			 		<tbody>
 			 			<tr>
-			 				<td style="text-align: left;" id="totalEnLetra">CERO 00/100 M.N.</th>
-			 				<td id="total">0</th>
+			 				<td style="text-align: left;" id="totalEnLetra">CERO 00/100 M.N.</td>
+			 				<td id="total">0</td>
 			 				
 			 			</tr>
 			 		</tbody>

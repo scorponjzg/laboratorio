@@ -19,7 +19,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="visor_general_laboratorio.php">Home</a></li>
+        <li class="active"><a href="visor_general_laboratorio.php">Inicio</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sistema
           <span class="caret"></span></a>
@@ -36,8 +36,10 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
        
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;<?php echo $_SESSION['nombre']?></span></a></li>
+        <li><label class="navbar-text"><span class="glyphicon glyphicon-home"></span>&nbsp;<?php echo $_SESSION['unidad']?></span></label></li>
+        <li><label class="navbar-text"><span class="glyphicon glyphicon-user"></span>&nbsp;<?php echo $_SESSION['nombre']?></span></label></li>
         <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+       
       </ul>
     </div>
   </div>
