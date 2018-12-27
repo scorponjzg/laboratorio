@@ -1,13 +1,18 @@
 <?php 
+session_start();
 function RandomString(){
+	$sucursal = explode(" ",$_SESSION["unidad"]);
+	$iniciales = "";
+	for($i=0; $i < count($sucursal); $i++){
+		$iniciales .= substr($sucursal[$i], 0,  1);
+	}
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $randstring = '';
-    for ($i = 0; $i < 10; $i++) {
-        $randstring = $characters[rand(0, strlen($characters))];
+    for ($i = 0; $i < 8; $i++) {
+        $randstring = $randstring.$characters[rand(0, strlen($characters))];
     }
-    return $randstring;
+    return $iniciales.$randstring;
 }
-session_start();
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
 	
 	
@@ -17,7 +22,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		$returnJs = [];
 		$estudio = [];
 		$total = 0;
-		$folio = "prueba78954";
+		$folio = RandomString();
 		$returnJs['ingresado'] = 'true';
 		$noCambios = 0;
 		$conn = new mysqli($mysql_config['host'], $mysql_config['user'], $mysql_config['pass'], $mysql_config['db']);
@@ -48,7 +53,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		 $pk = implode(",", $estudio);
 
 		 $sql = "SELECT SUM(precio_publico) as total FROM estudioClinico WHERE pk_estudioClinico IN ($pk)";
-		 error_log($sql);
+		 //error_log($sql);
 		 $result = $conn->query($sql);
 			
 		if($result->num_rows == 1){
@@ -58,16 +63,16 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 			if($total > 0){
 				$conn->query("START TRANSACTION;");
 				$sql = "INSERT INTO orden(folio, a_paterno_paciente, a_materno_paciente, nombre_paciente, edad, sexo, telefono, fk_usuario, fk_unidad,precio_total) VALUES('{$folio}','{$ap}','{$am}','{$nombre}',{$edad},'{$sexo}','{$tel}',{$_SESSION['usuario']},{$_SESSION['id_unidad']},{$total['total']});";
-				error_log($sql);
+				//error_log($sql);
 				$conn->query($sql);
 
 				
 				if($conn->affected_rows == 1){
 					$last_id = $conn -> insert_id;
-					error_log(count($estudio));
+					//error_log(count($estudio));
 					for($i=0; $i < count($estudio); $i++){
 						$sql = "INSERT INTO estudio(fk_estudioClinico,fk_orden) VALUES($estudio[$i],$last_id);";
-							error_log($sql);
+							//error_log($sql);
 							$conn->query($sql);
 							if($conn->affected_rows != 1){
 								$returnJs['ingresado']="5.Por el momento no se encuentra disponible el módulo de ordenes, por favor contacte al administrador del sistema.";
@@ -89,7 +94,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		
 		if($returnJs["ingresado"] == "true"){
 			$conn->query("COMMIT;");
-			error_log("COMMIT");
+			//error_log("COMMIT");
 			$returnJs['nueva']=base64_encode($last_id);
 		} else {
 			error_log("ROLLBACK");

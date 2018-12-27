@@ -84,9 +84,9 @@ $(function(){
 
 	$("#formulario").submit(function(event){
 		event.preventDefault();
-		console.log(estudios);
+		//console.log(estudios);
 		var estudio = $(this).serialize();
-		console.log(estudio);
+		//console.log(estudio);
 		if(validaForm()){	
 				
 				$.ajax({
@@ -98,7 +98,7 @@ $(function(){
 					console.log(entry);
 					if(entry.ingresado == 'true'){
 						//alert("Orden creada correctamente.");
-						window.open('estudio.php?'+entry.nueva, '_blank');
+						window.open('imprimir_orden.php?orden='+entry.nueva, '_blank');
 						window.location.replace("visor_general_laboratorio.php");
 					} else {
 						alert(entry.ingresado);
