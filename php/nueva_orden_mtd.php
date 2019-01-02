@@ -69,16 +69,16 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 				
 				if($conn->affected_rows == 1){
 					$last_id = $conn -> insert_id;
-					//error_log(count($estudio));
+					
 					for($i=0; $i < count($estudio); $i++){
-						$sql = "INSERT INTO estudio(fk_estudioClinico,fk_orden) VALUES($estudio[$i],$last_id);";
-							//error_log($sql);
+						$sql = "INSERT INTO estudio(fk_estudioClinico,fk_orden,cantidad,costo) VALUES({$estudio[$i]},{$last_id},(SELECT precio_publico FROM estudioClinico WHERE pk_estudioClinico={$estudio[$i]}),(SELECT IFNULL(precio_proveedor,0) FROM estudioClinico WHERE pk_estudioClinico={$estudio[$i]}));";
+							
 							$conn->query($sql);
+							
 							if($conn->affected_rows != 1){
 								$returnJs['ingresado']="5.Por el momento no se encuentra disponible el módulo de ordenes, por favor contacte al administrador del sistema.";
 							}
 					}
-
 					
 				
 				} else {
@@ -97,7 +97,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 			//error_log("COMMIT");
 			$returnJs['nueva']=base64_encode($last_id);
 		} else {
-			error_log("ROLLBACK");
+			error_log("ROLLBACK in nueva_orden_mtd.php");
 			$conn->query("ROLLBACK;");
 		}
 		echo json_encode($returnJs);

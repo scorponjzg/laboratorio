@@ -30,7 +30,7 @@ function obtenerEstudios(){
 		url:"php/obtener_estudios_mtd.php",
 		dataType: "json"
 	}).done(function(data){
-		console.log(data);
+		//console.log(data);
 		var estudio = '';
 		data.estudio.forEach(function(entry){
 			estudio += '<option  value="'+entry.id+'" >'+entry.codigo+' --- '+entry.estudio+' --- $'+entry.precio+'</option>';

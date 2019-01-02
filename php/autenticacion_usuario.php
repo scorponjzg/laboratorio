@@ -26,7 +26,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
 	"LEFT JOIN permiso as per on per.fk_perfil=p.pk_perfil ".
 	"LEFT JOIN modulo as m ON per.fk_modulo=m.pk_modulo ".
 	"WHERE u.usuario = '{$usuario}' && u.contrasena = '".sha1($contrasena)."' && u.activo = 1;";
-			error_log($sql);						
+			//error_log($sql);						
 	$result = $conn->query($sql);
 	if ($result->num_rows == 1) {
 			$row = $result->fetch_assoc();
