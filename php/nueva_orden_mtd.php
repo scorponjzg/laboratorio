@@ -6,7 +6,7 @@ function RandomString(){
 	for($i=0; $i < count($sucursal); $i++){
 		$iniciales .= substr($sucursal[$i], 0,  1);
 	}
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters = '0123456789';//abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     $randstring = '';
     for ($i = 0; $i < 8; $i++) {
         $randstring = $randstring.$characters[rand(0, strlen($characters))];

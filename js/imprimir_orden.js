@@ -15,7 +15,7 @@ function getQueryVariable(variable) {
 
 $(function(){
 	var orden = getQueryVariable('orden');
-	
+	var listado = "";
 	$.ajax({
 		method: "POST",
 		url: "php/imprimir_orden_mtd.php",
@@ -23,19 +23,31 @@ $(function(){
 		data: {'orden' : orden}
 		
 	}).done(function(data){
-		var estudio = "";
+		var listado = "";
 				console.log(data);
-		/*$('#estudio').val(data.estudio.id);
-		$('#clave').val(data.estudio.codigo);
-		$('#nombre').val(data.estudio.estudio);
-		$('#precio').val(data.estudio.precio);
-		if(data.estudio.costo != ''){
-			$('#costo').val(data.estudio.costo);
-		}
-		$('#modificador').text(data.estudio.responsable);
-		$('#registro').text(data.estudio.fecha_registro);
-		$('#editado').text(data.estudio.fecha_editado);*/
-
+		$('.folio').text(data.orden.folio);
+		$('.paciente').text(data.orden.nombre);
+		$('.edad').text(data.orden.edad);
+		$('.sexo').text(data.orden.sexo);
+		$('.tel').text(data.orden.tel);
+		$('.fIngreso').text(data.orden.f_ingreso);
+		$('.hIngreso').text(data.orden.hora_ingreso);
+		$('.fImpresion').text(data.orden.f_impresion);
+		$('.direccion').text(data.orden.direccion);
+		$('.tels').text(data.orden.telefono);
+		$('.web').text(data.orden.web);
+		$('.correo').text(data.orden.correo);
+		$('.atendio').text(data.orden.atendio);
+		data.estudio.forEach(function(entry){
+			listado += '<tr style="padding: 0px;"><td style="padding: 0px;">'+entry.codigo+'</td><td style="padding: 0px;">'+entry.estudio+'</td><td style="padding: 0px;">'+entry.precio+'</td>';
+			
+		});
+		$(".total").html(data.orden.total);
+		
+		$(".totalEnLetra").html("("+NumerosaLetras(data.orden.total)+")");
+		//console.log(listado);
+		$(".estudioSeleccionado").append(listado);
+		
 	}).fail(function(error){
 		console.log(error.responseText);
 		alert("Por el momento no est\u00E1 disponible el servicio, intente m\u00E1s tarde");
