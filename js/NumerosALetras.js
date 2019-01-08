@@ -32,8 +32,12 @@ function NumerosaLetras(cantidad) {
         }
 
         ent[1] = isNaN(ent[1]) ? '00' : ent[1];
+        if(ent[1].length < 2){
+        	return numero + " " + ent[1] + "0/100 M.N.";	
+        } else{
 
-        return numero + " " + ent[1] + "/100 M.N.";
+        	return numero + " " + ent[1].substring(0,2) + "/100 M.N.";	
+        }
     }
 }
 

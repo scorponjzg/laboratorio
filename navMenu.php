@@ -32,7 +32,7 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
           </ul>
         </li>
 	  
-        <li ><a href="#">Usuario</a></li> 
+        <li ><a href="usuario.php">Usuario</a></li> 
        
       </ul>
       <ul class="nav navbar-nav navbar-right">

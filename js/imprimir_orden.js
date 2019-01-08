@@ -60,12 +60,12 @@ $(function(){
 		});
 		$(".total").html(dobleDecimal(data.orden.total));
 		
-		//$(".totalEnLetra").html("("+NumerosaLetras(dobleDecimal(data.orden.total))+")");
-		$(".totalEnLetra").html("("+NumerosaLetras("10.50")+")");
+		$(".totalEnLetra").html("("+NumerosaLetras(dobleDecimal(data.orden.total))+")");
+		
 		//console.log(listado);
 		$(".estudioSeleccionado").append(listado);
 		window.print();
-		//window.close();
+		window.close();
 	}).fail(function(error){
 		console.log(error.responseText);
 		alert("Por el momento no est\u00E1 disponible el servicio, intente m\u00E1s tarde");
