@@ -200,6 +200,9 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
 					    <span type="text" class="form-control atendio " style="text-align: center;"> </span>
 				    </div>
 			    </div>
+			    <br>
+			    <br>
+			   
 	
 </div>
  
