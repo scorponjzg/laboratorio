@@ -53,7 +53,7 @@ th {
 								
 								<br>
 								<input type="text" placeholder="Ingrese el nombre o una parte para buscar" style="width:60%;margin: 18px auto ;text-align: center" id="buscar">
-								<button onclick="encotrarEstudio()">Buscar</button>
+								<button onclick="encotrarUsuario()">Buscar</button>
 							</div>
 						</div>
 					
@@ -65,11 +65,9 @@ th {
 							<table class="table table-bordered"style="margin-top: 20px;" id="reclutados" name="sucursales">
 								<thead >
 								  <tr class="info">
-									<th style="width:10%;">Nombre</th>
-									<th style="width:40%;">Dirección</th>
-									<th style="width:10%;">Teléfono</th>
-									<th style="width:10%;">Web</th>
-									<th style="width:10%;">Correo</th>
+									<th style="width:10%;">Unidad</th>
+									<th style="width:40%;">Nombre</th>
+									<th style="width:10%;">Perfil</th>
 									<?php if($_SESSION['tipo'] == 1){ ?>
 										<th style="width:10%;">Editar</th>
 										<th style="width:10%;">Eliminar</th>

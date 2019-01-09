@@ -22,7 +22,7 @@ function eliminaUsuario(){
 		});
 	}
 }
-function encotrarEstudio(){
+function encotrarUsuario(){
 
 	var buscar = $("#buscar").val();
 	
@@ -32,39 +32,40 @@ function encotrarEstudio(){
 		dataType:"json",
 		data:{"buscar":buscar}
 	}).done(function(data){
-		var unidad = "";
-		
-		if(typeof(data.unidad) != 'undefined'){
-			data.unidad.forEach(function(entry){
-				unidad += 
+		var usuario = "";
+		console.log(data);
+		if(typeof(data.usuario) != 'undefined'){
+			data.usuario.forEach(function(entry){
+				usuario += 
 					'<tr><td>'+entry.sucursal+'</td>'+
-					'<td>'+entry.lugar+'</td>'+
-					'<td>'+entry.tel+'</td>'+
-					'<td>'+entry.pagina+'</td>'+
-					'<td>'+entry.email+'</td>';
+					'<td>'+entry.nombre+'</td>'+
+					'<td>'+entry.perfil+'</td>';
 				if(data.show == true){
 		
-					  unidad += '<td><a href="#" class="btn btn-default edita" role="button" data-id="'+entry.id+'">'+
+					  usuario += '<td><a href="#" class="btn btn-default edita" role="button" data-id="'+entry.id+'">'+
 					  '<span class="glyphicon glyphicon-pencil"></span></a></td>'+
 					  '<td><a href="#" class="btn btn-default elimina" role="button" data-id="'+entry.id+'">'+
 					  '<span class="glyphicon glyphicon-remove"></span></a></td>';
 				}
 							
-				unidad +='</tr>';
+				usuario +='</tr>';
 			});
+		} else {
+			alert(data.msg);
 		}
 		$('#sucursal').empty();
-		$('#sucursal').append(unidad);
+		$('#sucursal').append(usuario);
 
 		$(".edita").on("click",editaUsuario);
 		$(".elimina").on("click",eliminaUsuario);
 
 	}).fail(function(error){
+		console.log(error);
 		alert("Por el momento no est\u00E1 disponible el servicio, intente m\u00E1s tarde");
 		
 	});
 }
 $(function(){
-	encotrarEstudio();
+	encotrarUsuario();
 	
 });
