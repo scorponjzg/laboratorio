@@ -46,7 +46,7 @@ th {
 						
 							<div style="text-align: center; margin-top: 12px" id="boton_nuevo">
 								<?php if($_SESSION['tipo'] == 1){ ?>
-									<button id="nuevo" type="button" class="btn btn-success" style="width:40%;text-align:center; color: white; background:rgb(32,190,198);" onclick="window.location.replace('nueva_sucursal.php')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo usuario</button>
+									<button id="nuevo" type="button" class="btn btn-success" style="width:40%;text-align:center; color: white; background:rgb(32,190,198);" onclick="window.location.replace('nuevo_usuario.php')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo usuario</button>
 									<br>
 									<br>
 								<?php }?>
