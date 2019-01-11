@@ -30,7 +30,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 	}else{
 		$returnJs['msg'] = "NO cuenta con los permisos necesarios para ver está información.";
 	}
-	error_log($sql);
+	
 	$result = $conn->query($sql);
 
 	if($result->num_rows >= 0){

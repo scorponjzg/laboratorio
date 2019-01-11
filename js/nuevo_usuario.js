@@ -1,12 +1,27 @@
 function validaForm(){
 	var correcto = false;
-	if($("#nombre").val() == ''){
-		alert("Debe de ingresar el nombre de la sucursal");
+	if($("#ap").val() == ''){
+		alert("Debe de ingresar el apellido paterno");
+		$("#ap").focus();
+	} else if($("#nombre").val() == ''){
+		alert("Debe de ingresar el nombre");
 		$("#nombre").focus();
-	} else if($("#dir").val() == ''){
-		alert("Debe de ingresar una dirección");
-		$("#der").focus();
-	} else {
+	} else if($("#usuario").val() == ''){
+		alert("Debe de ingresar un usuario");
+		$("#usuario").focus();
+	}else if($("#clave").val() == ''){
+		alert("Debe de ingresar la clave");
+		$("#clave").focus();
+	}else if($("#clave").val() != $("#confirmacion").val()){
+		alert("Las claves no son iguales");
+		$("#confirmacion").focus();
+	}else if($("#perfil").val() == '0'){
+		alert("Debe seleccionar un perfil para el usuario");
+		$("#perfil").focus();
+	}else if($("#sucursal").val() == '0'){
+		alert("Debe seleccionar una sucursal");
+		$("#sucursal").focus();
+	}else {
 		correcto =  true;
 	}
 	return correcto;
@@ -51,8 +66,8 @@ $(function(){
 				}).done(function(entry){
 					console.log(entry);
 					if(entry.ingresado == 'true'){
-						alert("Estudio creado correctamente.");
-						window.location.replace("sucursal.php");
+						alert("Usuario creado correctamente.");
+						window.location.replace("usuario.php");
 					} else {
 						alert(entry.ingresado);
 					}

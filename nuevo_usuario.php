@@ -46,28 +46,30 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"]) && $_SESSION['tipo
 				<label for="nombre">*Nombre(s):</label>
 				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese un nombre">
 			</div>
-			 <div class="form-group">	
-				<label for="usuario">*Usuario para acceder al sistema:</label>
-				<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese el nombre de usuario con el que se accederá al sistema">
-			 </div>
-			  <div class="form-group">	
-				<label for="clave">*Clave de acceso al sistema:</label>
-				<input type="text" class="form-control" id="clave" name="clave" placeholder="Ingrese la contraseña con la que se ingresara al sistema">
-			 </div>
-			 <div class="form-group">	
-				<label for="confirmacion">*Confirmar clave:</label>
-				<input type="text" class="form-control" id="confirmacion" name="confirmacion" placeholder="Confirme la contraseña de arriba">
-			 </div>
+			<div class="well">
+				 <div class="form-group">	
+					<label for="usuario">*Usuario para acceder al sistema:</label>
+					<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese el nombre de usuario con el que se accederá al sistema">
+				 </div>
+				  <div class="form-group">	
+					<label for="clave">*Clave de acceso al sistema:</label>
+					<input type="text" class="form-control" id="clave" name="clave" placeholder="Ingrese la contraseña con la que se ingresara al sistema">
+				 </div>
+				 <div class="form-group">	
+					<label for="confirmacion">*Confirmar clave:</label>
+					<input type="text" class="form-control" id="confirmacion" placeholder="Confirme la contraseña de arriba">
+				 </div>
+			</div>
 			 <div class="form-group">
 			 	<label for="perfil">*Perfil de usuario:</label>
-			 	<select class="form-control" id="perfil">
-			        <option>seleccione un perfil</option>
+			 	<select class="form-control" id="perfil" name="perfil">
+			        <option value="0">seleccione un perfil</option>
 			    </select>
 			 </div>
 			 <div class="form-group">
 			 	<label for="sucursal">*Sucursal:</label>
-			 	<select class="form-control" id="sucursal">
-			        <option>Seleccione la sucursal asignada</option>
+			 	<select class="form-control" id="sucursal" name="sucursal">
+			        <option Value="0">Seleccione la sucursal asignada</option>
 			    </select>
 			 </div>
 					  

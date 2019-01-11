@@ -26,14 +26,12 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
           <ul class="dropdown-menu">
             <li><a href="sucursal.php">Sucursales</a></li>
             <li><a href="estudio.php">Estudios</a></li>
-            <!--li><a href="perfil.php">Perfil</a></li>
-      		  <li><a href="asignar_permiso.php">Permoso -> Perfil</a></li>
-      		  <li><a href="asignar_perfil.php">Perfil -> Usuario</a></li-->
+            
           </ul>
         </li>
-	  
+	       <?php if($_SESSION['tipo'] == 1) { ?>
         <li ><a href="usuario.php">Usuario</a></li> 
-       
+        <?php  }; ?>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><label class="navbar-text"><span class="glyphicon glyphicon-home"></span>&nbsp;<?php echo $_SESSION['unidad']?></span></label></li>

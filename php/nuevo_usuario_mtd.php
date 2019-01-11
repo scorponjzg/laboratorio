@@ -19,15 +19,16 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		$conn -> set_charset('utf8');
 
 		$nombre = isset($_POST['nombre']) ? $conn->real_escape_string($_POST['nombre']) : '';
-		$dir = isset($_POST['dir']) ? $conn->real_escape_string($_POST['dir']) : '';
-		$tel = isset($_POST['tel']) ? $conn->real_escape_string($_POST['tel']) : '';
-		$web = isset($_POST['web']) ? $conn->real_escape_string($_POST['web']) : '';
-		$email = isset($_POST['email']) ? $conn->real_escape_string($_POST['email']) : '';
-
+		$ap = isset($_POST['ap']) ? $conn->real_escape_string($_POST['ap']) : '';
+		$am = isset($_POST['am']) ? $conn->real_escape_string($_POST['am']) : '';
+		$usuario = isset($_POST['usuario']) ? $conn->real_escape_string($_POST['usuario']) : '';
+		$clave = isset($_POST['clave']) ? $conn->real_escape_string($_POST['clave']) : '';
+		$perfil = isset($_POST['perfil']) ? $conn->real_escape_string(base64_decode($_POST['perfil'])) : '';
+		$sucursal = isset($_POST['sucursal']) ? $conn->real_escape_string(base64_decode($_POST['sucursal'])) : '';
 		
-			$sql = "INSERT INTO unidad(nombre,direccion, telefono, web, correo) VALUES('{$nombre}','{$dir}','{$tel}','{$web}','{$email}');";
+			$sql = "INSERT INTO usuario(fk_perfil, fk_unidad, nombre, a_paterno, a_materno,usuario,contrasena) VALUES({$perfil},{$sucursal},'{$nombre}','{$ap}','{$am}','{$usuario}','".sha1($clave)."');";
 		
-			//error_log($sql);
+			error_log($sql);
 			$conn->query($sql);
 			
 			if($conn->affected_rows == 1){
