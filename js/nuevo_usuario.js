@@ -34,7 +34,7 @@ function obtenerPerfilSucursal(){
 		dataType: "json"
 
 	}).done(function(data){
-		console.log(data);
+	
 		var perfil = "";
 		var sucursal = "";
 		data.perfil.forEach(function(entry){

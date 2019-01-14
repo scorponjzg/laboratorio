@@ -25,7 +25,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		$sql = "SELECT u.pk_usuario as id, CONCAT(u.nombre,' ', u.a_paterno,' ', IFNULL(u.a_materno, '')) as nombre, p.perfil, uni.nombre as sucursal FROM usuario as u ".
 	"INNER JOIN perfil as p ON u.fk_perfil=p.pk_perfil ".
 	"INNER JOIN unidad as uni ON u.fk_unidad=uni.pk_unidad ".
-	"WHERE u.activo = 1 ".$buscar; 
+	"WHERE u.activo = 1 && u.pk_usuario > 1".$buscar; 
 		$returnJs['show']= true;
 	}else{
 		$returnJs['msg'] = "NO cuenta con los permisos necesarios para ver está información.";
