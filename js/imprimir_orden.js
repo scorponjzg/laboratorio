@@ -34,6 +34,7 @@ $(function(){
 	var orden = getQueryVariable('orden');
 	var listado = "";
 	$.ajax({
+		async:false,
 		method: "POST",
 		url: "php/imprimir_orden_mtd.php",
 		dataType:"json",
@@ -64,10 +65,8 @@ $(function(){
 		
 		//console.log(listado);
 		$(".estudioSeleccionado").append(listado);
-		window.print();
-		setTimeout(function(){
-			window.close()
-		},2000)
+		
+		
 		
 		
 	}).fail(function(error){
@@ -75,6 +74,11 @@ $(function(){
 		alert("Por el momento no est\u00E1 disponible el servicio, intente m\u00E1s tarde");
 	});
 	
-	
+	    setTimeout(function(){
+			window.print();
+		},1000)
+		setTimeout(function(){
+			window.close();
+		},2000)
 	
 });

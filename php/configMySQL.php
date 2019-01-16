@@ -11,8 +11,8 @@ $mysql_config = array(
 );
 // $mysql_config = array(
   // 'host' => 'localhost',
-  // 'db' => 'id5719081_aj_agenda',
-  // 'user' => 'id5719081_ajzg',
-  // 'pass' => 'mysql123'
+  // 'db' => 'vivilab_laboratorio',
+  // 'user' => 'vivilab_laboratorio',
+  // 'pass' => '#vivilab#laboratorio#'
 // );
 ?>

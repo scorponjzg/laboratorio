@@ -29,6 +29,13 @@ th {
 	
 	text-align:center;
 }
+.selectores{
+	width:45%;
+	margin: 20px auto;
+}
+button{
+	width:45%;
+}
 </style>
 <div class="container centrado" style="padding-left: 0px;">
 	<?php include 'navMenu.php'?>
@@ -49,8 +56,26 @@ th {
 								
 								<button id="nuevo" type="button" class="btn btn-success" data-accion="1" style="width:45%;text-align:center; color: white; background:rgb(32,190,198);" onclick="window.location.href='nueva_orden.php'"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva orden</button>
 								<br>
-								<br>
-								<button onclick="crearCSV('ordenes','ordene')">Exportar a CSV</button>
+								<?php if($_SESSION['tipo'] == 1){ ?>
+									<div class="selectores">
+									 	
+									 	<select class="form-control" id="fecha" name="fecha">
+									        <option value="0">seleccione una fecha</option>
+									    </select>
+									 </div>
+									 <div class="selectores">
+									 	
+									 	<select class="form-control" id="sucursal" name="sucursal">
+									        <option Value="0">Seleccione la sucursal asignada</option>
+									    </select>
+									 </div>
+								<?php } ?>
+								<div class="selectores">
+									<?php if($_SESSION['tipo'] == 1){ ?>
+								  		 <button type="commit" onclick="encotrarOrden()" class="btn btn-info " style="margin-right:25px;" >Buscar</button>
+									<?php }?>
+									<button class="btn btn-info " onclick="crearCSV('ordenes','ordene')">Exportar a CSV</button>
+								</div>
 							</div>
 						</div>
 						

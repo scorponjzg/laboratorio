@@ -25,9 +25,9 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		$costo = isset($_POST['costo']) ? $conn->real_escape_string($_POST['costo']) : '';
 
 		if($costo != ''){
-			$sql = "INSERT INTO estudioClinico(clave,nombre,precio_publico,precio_provedor,tipo_ingreso,quien_modifico) VALUES('{$clave}','{$nombre}',{$precio},{$costo},'Ingreso por sistema',(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}));";
+			$sql = "INSERT INTO estudioclinico(clave,nombre,precio_publico,precio_provedor,tipo_ingreso,quien_modifico) VALUES('{$clave}','{$nombre}',{$precio},{$costo},'Ingreso por sistema',(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}));";
 		} else {
-			$sql = "INSERT INTO estudioClinico(clave,nombre,precio_publico,tipo_ingreso,quien_modifico) VALUES('{$clave}','{$nombre}',{$precio},'Ingreso por sistema',(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}));";
+			$sql = "INSERT INTO estudioclinico(clave,nombre,precio_publico,tipo_ingreso,quien_modifico) VALUES('{$clave}','{$nombre}',{$precio},'Ingreso por sistema',(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}));";
 		}
 			
 			$conn->query($sql);

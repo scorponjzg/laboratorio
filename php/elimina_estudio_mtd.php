@@ -19,7 +19,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 		$id_estudio = isset($_POST['estudio']) ? $conn->real_escape_string($_POST['estudio']) : '';
 			
-			$sql = "UPDATE estudioClinico SET activo=0,quien_modifico=(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}) WHERE pk_estudioClinico=".base64_decode($id_estudio)."; ";
+			$sql = "UPDATE estudioclinico SET activo=0,quien_modifico=(SELECT CONCAT(u.a_paterno, ' ', u.a_materno, ' ', u.nombre, '. Perfil: ',p.perfil ) FROM usuario as u LEFT JOIN perfil as p ON u.fk_perfil=p.pk_perfil WHERE u.pk_usuario={$_SESSION['usuario']}) WHERE pk_estudioClinico=".base64_decode($id_estudio)."; ";
 				
 			$conn->query($sql);
 			if($conn->affected_rows == 1){

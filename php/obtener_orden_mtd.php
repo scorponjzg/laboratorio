@@ -14,18 +14,18 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		die("Connection failed: " . $conn -> connect_error);		
 	}
 	$buscar = isset($_POST['buscar']) && $_POST['buscar'] !='' ? " && nombre like '%".$conn -> real_escape_string($_POST['buscar'])."%';" : '';
-	$sucursal = isset($_POST['sucursal']) && $_POST['sucursal'] !='' ? " && o.fk_unidad = ".$conn -> real_escape_string($_POST['sucursal']) : " && o.fk_unidad = ".$_SESSION['id_unidad'];
-	$fecha = isset($_POST['fecha']) && $_POST['fecha'] !='' ? " && SUBSTRING_INDEX(o.fecha_ingreso, ' ', 1) = '".$conn -> real_escape_string($_POST['fecha'])."'" : " && SUBSTRING_INDEX(o.fecha_ingreso, ' ', 1) = '".date('Y-m-d')."'";
+	$sucursal = isset($_POST['sucursal']) && $_POST['sucursal'] !='0' ? " && o.fk_unidad = ".base64_decode($conn -> real_escape_string($_POST['sucursal'])) : " && o.fk_unidad = ".$_SESSION['id_unidad'];
+	$fecha = isset($_POST['fecha']) && $_POST['fecha'] !='0' ? " && SUBSTRING_INDEX(o.fecha_ingreso, ' ', 1) = '".$conn -> real_escape_string($_POST['fecha'])."'" : " && SUBSTRING_INDEX(o.fecha_ingreso, ' ', 1) = '".date('Y-m-d')."'";
 	
 	$conn -> set_charset('utf8');
 		
 		$sql = "SELECT  CONCAT(u.a_paterno,' ',IFNULL(u.a_materno,''),' ',u.nombre) as atendio, o.pk_orden as id, o.folio, SUBSTRING_INDEX(o.fecha_ingreso, ' ', 1) as registro , o.estatus as estado, o.precio_total as total FROM orden as o INNER JOIN usuario as u ON u.pk_usuario = o.fk_usuario  WHERE o.pk_orden>0 ".$sucursal.$fecha.$buscar; 
 		
-	if(isset($_SESSION['usuario']) && $_SESSION['usuario'] == 1){
+	if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1){
 		$sql = "SELECT  CONCAT(u.a_paterno,' ',IFNULL(u.a_materno,''),' ',u.nombre) as atendio, o.pk_orden as id, o.folio, SUBSTRING_INDEX(o.fecha_ingreso, ' ', 1) as registro , o.estatus as estado, o.precio_total as total,o.costo_total as costo FROM orden as o INNER JOIN usuario as u ON u.pk_usuario = o.fk_usuario  WHERE o.pk_orden>0 ".$sucursal.$fecha.$buscar;
 		$returnJs['show']= true;
 	}
-	error_log($sql);
+	
 	$result = $conn->query($sql);
 
 	if($result->num_rows >= 0){

@@ -66,6 +66,7 @@ function encotrarEstudio(){
 		$(".ver").on("click",verDetalle);
 
 	}).fail(function(error){
+		console.log(error.responseText);
 		alert("Por el momento no est\u00E1 disponible el servicio, intente m\u00E1s tarde");
 		
 	});

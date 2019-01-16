@@ -27,7 +27,7 @@ $(function(){
 				}).done(function(entry){
 					console.log(entry);
 					if(entry.ingresado == 'true'){
-						alert("Estudio creado correctamente.");
+						alert("Sucursal creada correctamente.");
 						window.location.replace("sucursal.php");
 					} else {
 						alert(entry.ingresado);

@@ -9,7 +9,7 @@ function RandomString(){
     $characters = '0123456789';//abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     $randstring = '';
     for ($i = 0; $i < 8; $i++) {
-        $randstring = $randstring.$characters[rand(0, strlen($characters))];
+        $randstring = $randstring.$characters[rand(0, strlen($characters)-1)];
     }
     return $iniciales.$randstring;
 }
@@ -52,7 +52,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 		 $pk = implode(",", $estudio);
 
-		 $sql = "SELECT SUM(precio_publico) as total, SUM(precio_proveedor) as costo FROM estudioClinico WHERE pk_estudioClinico IN ($pk)";
+		 $sql = "SELECT SUM(precio_publico) as total, SUM(precio_proveedor) as costo FROM estudioclinico WHERE pk_estudioClinico IN ($pk)";
 		 //error_log($sql);
 		 $result = $conn->query($sql);
 			
@@ -71,7 +71,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 					$last_id = $conn -> insert_id;
 					
 					for($i=0; $i < count($estudio); $i++){
-						$sql = "INSERT INTO estudio(fk_estudioClinico,fk_orden,cantidad,costo) VALUES({$estudio[$i]},{$last_id},(SELECT precio_publico FROM estudioClinico WHERE pk_estudioClinico={$estudio[$i]}),(SELECT IFNULL(precio_proveedor,0) FROM estudioClinico WHERE pk_estudioClinico={$estudio[$i]}));";
+						$sql = "INSERT INTO estudio(fk_estudioClinico,fk_orden,cantidad,costo) VALUES({$estudio[$i]},{$last_id},(SELECT precio_publico FROM estudioclinico WHERE pk_estudioClinico={$estudio[$i]}),(SELECT IFNULL(precio_proveedor,0) FROM estudioclinico WHERE pk_estudioClinico={$estudio[$i]}));";
 							
 							$conn->query($sql);
 							

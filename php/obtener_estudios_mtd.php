@@ -19,26 +19,27 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 	
 	$conn -> set_charset('utf8');
 		
-		$sql = "SELECT clave as codigo, nombre as estudio, precio_publico as precio,pk_estudioClinico as id FROM estudioClinico WHERE activo=1 ".$buscar; 
+		$sql = "SELECT clave as codigo, nombre as estudio, precio_publico as precio,pk_estudioClinico as id FROM estudioclinico WHERE activo=1 ".$buscar; 
 	
-	if(isset($_SESSION['usuario']) && $_SESSION['usuario'] == 1){
-		$sql = "SELECT clave as codigo, nombre as estudio, precio_publico as precio,IFNULL(precio_proveedor,'No registrado') as costo, pk_estudioClinico as id FROM estudioClinico WHERE activo=1 ".$buscar; 
+	if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1){
+		$sql = "SELECT clave as codigo, nombre as estudio, precio_publico as precio,IFNULL(precio_proveedor,'No registrado') as costo, pk_estudioClinico as id FROM estudioclinico WHERE activo=1 ".$buscar; 
 		$returnJs['show']= true;
 	}
-	
+	$returnJs['sql'] = $sql;
 	$result = $conn->query($sql);
 
-	if($result->num_rows >= 0){
+	if($result->num_rows > 0){
 	
-	while($row = $result->fetch_assoc()){
-		$row['id']= base64_encode($row['id']);
-		$returnJs['estudio'][] = $row;
+		while($row = $result->fetch_assoc()){
+			$row['id']= base64_encode($row['id']);
+			$returnJs['estudio'][] = $row;
+			
+		}
+		 $result->free();
 		
 	}
-	 $result->free();
 	echo json_encode($returnJs);
 	$conn->close();
-}
 } 
 
 ?>

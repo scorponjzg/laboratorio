@@ -19,7 +19,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 	
 	$conn -> set_charset('utf8');
 		
-	$sql = "SELECT CONCAT(u.a_paterno,' ',IFNULL(u.a_materno,''),', ',u.nombre) AS atendio, uni.*, o.folio, CONCAT(o.a_paterno_paciente,' ', IFNULL(o.a_materno_paciente,''),', ',o.nombre_paciente) AS nombre, o.edad, o.sexo,IFNULL(o.telefono,'') AS tel, DATE_FORMAT(o.fecha_ingreso, '%h:%i' ) AS hora_ingreso,  DATE_FORMAT(o.fecha_ingreso, '%d:%m:%Y' ) as f_ingreso , DATE_FORMAT(NOW(), '%d:%m:%Y') as f_impresion, o.precio_total as total FROM orden AS o INNER JOIN usuario AS u ON u.pk_usuario = o.fk_usuario INNER JOIN unidad AS uni ON uni.pk_unidad = o.fk_unidad WHERE estatus=1 && pk_orden = ".base64_decode($orden);
+	$sql = "SELECT CONCAT(u.a_paterno,' ',IFNULL(u.a_materno,''),', ',u.nombre) AS atendio, uni.*, o.folio, CONCAT(o.a_paterno_paciente,' ', IFNULL(o.a_materno_paciente,''),', ',o.nombre_paciente) AS nombre, o.edad, o.sexo,IFNULL(o.telefono,'') AS tel, DATE_FORMAT(o.fecha_ingreso, '%h:%i' ) AS hora_ingreso,  DATE_FORMAT(o.fecha_ingreso, '%d-%m-%Y' ) as f_ingreso , DATE_FORMAT(NOW(), '%d-%m-%Y') as f_impresion, o.precio_total as total FROM orden AS o INNER JOIN usuario AS u ON u.pk_usuario = o.fk_usuario INNER JOIN unidad AS uni ON uni.pk_unidad = o.fk_unidad WHERE estatus=1 && pk_orden = ".base64_decode($orden);
 		
 		//error_log($sql);
 	$result = $conn->query($sql);
@@ -32,7 +32,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		error_log($conn->error);
 	}
 
-	$sql = "SELECT e.cantidad AS precio, ec.nombre AS estudio, ec.clave AS codigo FROM estudio as e INNER JOIN estudioClinico as ec ON e.fk_estudioClinico = ec.pk_estudioClinico WHERE e.fk_orden =".base64_decode($orden);
+	$sql = "SELECT e.cantidad AS precio, ec.nombre AS estudio, ec.clave AS codigo FROM estudio as e INNER JOIN estudioclinico as ec ON e.fk_estudioClinico = ec.pk_estudioClinico WHERE e.fk_orden =".base64_decode($orden);
 	//error_log($sql);
 	$result2 = $conn->query($sql);
 

@@ -22,28 +22,32 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		
 	
 	if(isset($_SESSION['usuario']) && $_SESSION['usuario'] == 1){
+
 		$sql = "SELECT u.pk_usuario as id, CONCAT(u.nombre,' ', u.a_paterno,' ', IFNULL(u.a_materno, '')) as nombre, p.perfil, uni.nombre as sucursal FROM usuario as u ".
 	"INNER JOIN perfil as p ON u.fk_perfil=p.pk_perfil ".
 	"INNER JOIN unidad as uni ON u.fk_unidad=uni.pk_unidad ".
 	"WHERE u.activo = 1 && u.pk_usuario > 1".$buscar; 
 		$returnJs['show']= true;
 	}else{
-		$returnJs['msg'] = "NO cuenta con los permisos necesarios para ver está información.";
+		$returnJs['msg'] = "NO cuenta con los permisos necesarios para ver el contenido solicitado.";
 	}
 	
 	$result = $conn->query($sql);
-
-	if($result->num_rows >= 0){
 	
-	while($row = $result->fetch_assoc()){
-		$row['id']= base64_encode($row['id']);
-		$returnJs['usuario'][] = $row;
-		
-	}
+	if($result->num_rows > 0){
+	
+		while($row = $result->fetch_assoc()){
+			$row['id']= base64_encode($row['id']);
+			$returnJs['usuario'][] = $row;
+		}
 	 $result->free();
+	} else {
+		$returnJs['msg'] = "NO se encuentra ningún usuario registrado";
+	}
+	
 	echo json_encode($returnJs);
 	$conn->close();
-}
+
 } 
 
 ?>

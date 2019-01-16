@@ -57,6 +57,33 @@ function dobleDecimal(value){
 			return valueString + ".00"
 		}
 }
+function obtenerFechaSucursal(){
+
+	$.ajax({
+		method: "POST",
+		url:"php/obtener_fecha_sucursal_mtd.php",
+		dataType: "json"
+
+	}).done(function(data){
+		console.log(data);
+		var fecha = "";
+		var sucursal = "";
+		if(typeof(data.fecha) != "undefined"){
+			data.fecha.forEach(function(entry){
+				fecha += "<option value="+entry.fecha+">"+entry.fecha+"</option>";
+			});
+		}
+		data.unidad.forEach(function(entry){
+			sucursal += "<option value="+entry.id+">"+entry.unidad+"</option>";
+		});
+
+		$("#fecha").append(fecha);
+		$("#sucursal").append(sucursal);
+	}).fail(function(error){
+		console.log(error.responseText);
+
+	});
+}
 function cancelarOrden(){
 	//window.location.href= "imprimir_orden.php?orden="+$(this).attr("data-id");
 	
@@ -71,9 +98,10 @@ function cancelarOrden(){
 		data:{"orden":orden}
 		}).done(function(data){
 		if(data.cancelar == 'true'){
+				
+				$("#estado"+atob(orden)).html("cancelado");
 				alert("Orden cancelada correctamente.");
-				$(this).attr('disabled',false);
-				$("#estado"+btoa(orden)).html("cancelado");
+				window.location.href='visor_general_laboratorio.php';
 			} else {
 				alert(entry.editado);
 			}
@@ -85,12 +113,14 @@ function cancelarOrden(){
 function encotrarOrden(){
 
 	var buscar = $("#buscar").val();
-	
+	var sucursal = $("#sucursal").val();
+	var fecha = $("#fecha").val();
+	total = costo = utilidad = 0.00;
 	$.ajax({
 		method: "POST",
 		url: "php/obtener_orden_mtd.php",
 		dataType:"json",
-		data:{"buscar":buscar}
+		data:{"buscar":buscar,"sucursal":sucursal,"fecha":fecha}
 	}).done(function(data){
 		console.log(data);
 		var orden = activo = "";
@@ -113,17 +143,21 @@ function encotrarOrden(){
 								'<td>'+entry.atendio+'</td>'+
 								'<td>'+entry.registro+'</td>'+
 								'<td>'+entry.total+'</td>';
-				total += parseFloat(entry.total);				
+				if(entry.estado == 1){
+					total += parseFloat(entry.total);
+				}				
 				if(data.show == true){
 					orden +='<td>'+entry.costo+'</td>'+
 							  '<td>'+(entry.total - entry.costo)+'</td>';
-				    costo += parseFloat(entry.costo);
-				    utilidad += parseFloat(entry.total - entry.costo);
+					if(entry.estado == 1){
+					    costo += parseFloat(entry.costo);
+					    utilidad += parseFloat(entry.total - entry.costo);
+					}
 				}
 
-				orden +='<td id ="estado'+btoa(entry.id)+'">'+estadoLetra+'</td>';
+				orden +='<td>'+estadoLetra+'</td>';
 				if(data.show == true){
-					orden +='<td><a href="#" class="btn btn-danger cancelar" role="button" data-id="'+entry.id+'"'+activo+'>'+
+					orden +='<td><a href="#" class="btn btn-danger cancelar" role="button" data-id="'+entry.id+'"'+activo+' id="cancelar"'+atob(entry.id)+'>'+
 							  '<span class="glyphicon glyphicon-remove"></span></a></td>';
 				}
 				orden +='</tr>';
@@ -144,5 +178,5 @@ function encotrarOrden(){
 }
 $(function(){
 	encotrarOrden();
-	
+	obtenerFechaSucursal();
 });

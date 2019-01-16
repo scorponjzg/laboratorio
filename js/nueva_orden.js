@@ -98,7 +98,7 @@ $(function(){
 					console.log(entry);
 					if(entry.ingresado == 'true'){
 						//alert("Orden creada correctamente.");
-						window.open('imprimir_orden.php?orden='+entry.nueva, '_blank');
+						window.open('imprimir_orden.php?orden='+entry.nueva, '_self');
 						window.location.replace("visor_general_laboratorio.php");
 					} else {
 						alert(entry.ingresado);
