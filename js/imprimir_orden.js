@@ -14,7 +14,7 @@ function getQueryVariable(variable) {
 
 function dobleDecimal(value){
 		var valueString = value + "";
-		console.log(valueString.indexOf("."));
+		
 		if(valueString.indexOf(".") > 0){
 				var separarDecimales = valueString.split(".");
 				//var decimales = separarDecimales[1].spli("");
@@ -65,7 +65,11 @@ $(function(){
 		//console.log(listado);
 		$(".estudioSeleccionado").append(listado);
 		window.print();
-		window.close();
+		setTimeout(function(){
+			window.close()
+		},2000)
+		
+		
 	}).fail(function(error){
 		console.log(error.responseText);
 		alert("Por el momento no est\u00E1 disponible el servicio, intente m\u00E1s tarde");

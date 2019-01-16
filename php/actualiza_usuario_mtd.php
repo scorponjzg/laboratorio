@@ -32,7 +32,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 			$sql = "UPDATE usuario SET nombre='{$nombre}', a_paterno='{$ap}', a_materno='{$am}', usuario='{$usuario}', contrasena='".sha1($clave)."', usuario='{$usuario}', fk_perfil = {$perfil}, fk_unidad={$sucursal} WHERE pk_usuario=".base64_decode($id)."; ";
 		}
-				error_log($sql);
+				
 			$noCambios = $conn->query($sql);
 			
 			if($conn->affected_rows == 1){

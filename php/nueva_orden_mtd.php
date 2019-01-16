@@ -52,7 +52,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 		 $pk = implode(",", $estudio);
 
-		 $sql = "SELECT SUM(precio_publico) as total FROM estudioClinico WHERE pk_estudioClinico IN ($pk)";
+		 $sql = "SELECT SUM(precio_publico) as total, SUM(precio_proveedor) as costo FROM estudioClinico WHERE pk_estudioClinico IN ($pk)";
 		 //error_log($sql);
 		 $result = $conn->query($sql);
 			
@@ -62,7 +62,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 			if($total > 0){
 				$conn->query("START TRANSACTION;");
-				$sql = "INSERT INTO orden(folio, a_paterno_paciente, a_materno_paciente, nombre_paciente, edad, sexo, telefono, fk_usuario, fk_unidad,precio_total) VALUES('{$folio}','{$ap}','{$am}','{$nombre}',{$edad},'{$sexo}','{$tel}',{$_SESSION['usuario']},{$_SESSION['id_unidad']},{$total['total']});";
+				$sql = "INSERT INTO orden(folio, a_paterno_paciente, a_materno_paciente, nombre_paciente, edad, sexo, telefono, fk_usuario, fk_unidad,precio_total,costo_total) VALUES('{$folio}','{$ap}','{$am}','{$nombre}',{$edad},'{$sexo}','{$tel}',{$_SESSION['usuario']},{$_SESSION['id_unidad']},{$total['total']},{$total['costo']});";
 				//error_log($sql);
 				$conn->query($sql);
 

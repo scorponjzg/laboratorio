@@ -19,7 +19,8 @@ if (!isset($_SESSION["tipo"]) && !isset($_SESSION["usuario"])) {
   <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/bootstrap-select.js" type="text/javascript"></script>
-  <!--script src="js/visor_general_laboratorio.js"></script-->
+  <script src="js/numerosALetras.js"></script>
+  <script src="js/visor_general_laboratorio.js"></script>
 </head>
 <body>
 
@@ -49,7 +50,7 @@ th {
 								<button id="nuevo" type="button" class="btn btn-success" data-accion="1" style="width:45%;text-align:center; color: white; background:rgb(32,190,198);" onclick="window.location.href='nueva_orden.php'"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva orden</button>
 								<br>
 								<br>
-								<!--button onclick="crearCSV('reclutados','reclutados')">Exportar a CSV</button-->
+								<button onclick="crearCSV('ordenes','ordene')">Exportar a CSV</button>
 							</div>
 						</div>
 						
@@ -57,29 +58,55 @@ th {
 					
 					<div class="tab-content">
 						
-							<!--div class="table-responsive">
-								<table class="table table-bordered"style="margin-top: 20px;" id="reclutados" name="reclutados">
-									<thead >
-									  <tr class="info">
-										<th style="width:12%;">Foto</th>
-										<th style="width:13%;">Nombre</th>
-										<th style="width:12%;">Tel&eacute;fono / Celular</th>
-										<th style="width:10%;">Medio de contacto</th>
-										<th style="width:4%;">Edad</th>
-										<th style="width:10%;">Servicio de interes</th>
-										<th style="width:10%;">Estatus</th>
-										<th style="width:13%;">Reclutador</th>
-										<th style="width:10%;">Fecha</th>
-										<th style="width:6%;">Editar</th>
-									  </tr>
-									</thead>
-									<tbody id="reporte">
-									  
-									</tbody>
-								</table-->
-							
-								<br>
-					</div>
+						<div class="table-responsive">
+							<table class="table table-bordered"style="margin-top: 20px;" id="ordenes" name="ordenes">
+								<thead >
+								  <tr class="info">
+									<th style="width:15%;">Folio</th>
+									<th style="width:10%;">Num.Estudios</th>
+									<th style="width:15%;">Atendi&oacute;</th>
+									<th style="width:8%;">Registro</th>
+									<th style="width:8%;">Total</th>
+									<?php if($_SESSION['tipo'] == 1){ ?>
+										<th style="width:8%;">Costo</th>
+										<th style="width:8%;">Utilidad</th>
+									<?php } ?>
+									<th style="width:8%;">Estado</th>
+									<?php if($_SESSION['tipo'] == 1){ ?>
+										<th style="width:8%;">Cancelar</th>
+									<?php } ?>
+								  </tr>
+								</thead>
+								<tbody id="orden">
+								  
+								</tbody>
+							</table>
+						
+							<br>
+							<table class="table table-bordered">
+						 		<thead>
+						 			<tr>
+						 				<th class="info" style="width: 80%;">Importe en letra</th>
+						 				<th class="info" style="width: 20%;text-align: center">Total</th>
+						 				<?php if($_SESSION['tipo'] == 1){ ?>
+							 				<th class="info" style="width: 20%;text-align: center">Costo</th>
+							 				<th class="info" style="width: 20%;text-align: center">Utilidad</th>
+						 			    <?php }?>
+						 				
+						 			</tr>
+						 		</thead>
+						 		<tbody>
+						 			<tr>
+						 				<td style="text-align: left;" id="totalEnLetra">CERO 00/100 M.N.</td>
+						 				<td id="total">0</td>
+						 				<?php if($_SESSION['tipo'] == 1){ ?>
+							 				<td id="costo">0</td>
+							 				<td id="utilidad">0</td>
+						 			    <?php }?>
+						 			</tr>
+						 		</tbody>
+						 	</table>
+						</div>
 				</div>
 			</div>
 		</div>
